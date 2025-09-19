@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BiomeDataEntry" load_steps=3 format=3 uid="uid://bnne2veo0wci8"]
+
+[ext_resource type="Script" uid="uid://bqboe44j4woi5" path="res://game/world/world_generator/biome_data_entry.gd" id="1_knm2e"]
+[ext_resource type="FastNoiseLite" uid="uid://crwlnernotshu" path="res://biomes/noise_maps/stone.tres" id="1_oi0sg"]
+
+[resource]
+script = ExtResource("1_knm2e")
+map = ExtResource("1_oi0sg")
+threshold = 0.405
+metadata/_custom_type_script = "uid://bqboe44j4woi5"

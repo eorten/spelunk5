@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BiomeDataEntry" load_steps=3 format=3 uid="uid://n4ypgbjir8ta"]
+
+[ext_resource type="FastNoiseLite" uid="uid://bightvbrw15ut" path="res://biomes/noise_maps/dirt.tres" id="1_rd533"]
+[ext_resource type="Script" uid="uid://bqboe44j4woi5" path="res://game/world/world_generator/biome_data_entry.gd" id="2_5851f"]
+
+[resource]
+script = ExtResource("2_5851f")
+map = ExtResource("1_rd533")
+threshold = -0.205
+metadata/_custom_type_script = "uid://bqboe44j4woi5"

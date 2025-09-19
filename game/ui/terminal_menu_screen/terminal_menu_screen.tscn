@@ -1,0 +1,240 @@
+[gd_scene load_steps=7 format=3 uid="uid://c34ikudpsdehf"]
+
+[ext_resource type="Theme" uid="uid://qbakscdd8o1p" path="res://theme/default.tres" id="1_e15kt"]
+[ext_resource type="Shader" uid="uid://dqlays4pv4t8g" path="res://theme/post_process/crt.gdshader" id="2_b68pv"]
+[ext_resource type="Shader" uid="uid://bj20fdbqsa2qh" path="res://theme/post_process/bloom.gdshader" id="2_ldof7"]
+[ext_resource type="Script" uid="uid://kksop1ypk1b0" path="res://game/ui/terminal_menu_screen/terminal_menu_screen.gd" id="2_yt5hn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnlw7"]
+shader = ExtResource("2_ldof7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyjrh"]
+shader = ExtResource("2_b68pv")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.5850000277875
+shader_parameter/scanlines_width = 0.35600001691
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(200, 200)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.745
+shader_parameter/roll_size = 6.87200032642
+shader_parameter/roll_variation = 4.64800021752012
+shader_parameter/distort_intensity = 0.0030000001425
+shader_parameter/noise_opacity = 0.110000005225
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.006000000285
+shader_parameter/aberration = 0.00500004773750006
+shader_parameter/brightness = 2.21
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.730000034675
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="TerminalMenuScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_e15kt")
+script = ExtResource("2_yt5hn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.19434929, 0.19434926, 0.19434926, 1)
+
+[node name="MenuSideBar" type="MarginContainer" parent="."]
+modulate = Color(1.0569379, 1.0569379, 1.0569379, 1)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 250.0
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuSideBar"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuSideBar/PanelContainer"]
+layout_mode = 2
+text = "MENU
+----
+> Robots
+> Move
+> Crafting"
+vertical_alignment = 1
+
+[node name="ResourceSideBar" type="MarginContainer" parent="."]
+modulate = Color(1.0569379, 1.0569379, 1.0569379, 1)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ResourceSideBar"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ResourceSideBar/PanelContainer"]
+layout_mode = 2
+text = "RESOURCES
+----
+Currency: 20$
+Energy: 20%
+
+ORES:
+ice: 		12
+fire: 		8
+fungal: 	0
+crystal: 	19"
+vertical_alignment = 1
+
+[node name="CenterPanel" type="MarginContainer" parent="."]
+modulate = Color(1.0569379, 1.0569379, 1.0569379, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 250.0
+offset_right = -250.0
+offset_bottom = -244.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectDestinationPanel" type="PanelContainer" parent="CenterPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterPanel/SelectDestinationPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterPanel/SelectDestinationPanel/VBoxContainer"]
+layout_mode = 2
+text = "SELECT STATION LOCATION
+----
+Available locations:
+"
+fit_content = true
+vertical_alignment = 1
+
+[node name="CaveButton" type="Button" parent="CenterPanel/SelectDestinationPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Caverns
+  -Low threat level"
+alignment = 0
+
+[node name="FungalCaveButton" type="Button" parent="CenterPanel/SelectDestinationPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Fungal caverns
+  -Beware of toxic spores
+  -Fungal ore"
+alignment = 0
+
+[node name="FieryCaveButton" type="Button" parent="CenterPanel/SelectDestinationPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Fiery caverns
+  -Beware of hot rocks
+  -Lava ore"
+alignment = 0
+
+[node name="IceCaveButton" type="Button" parent="CenterPanel/SelectDestinationPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Icy caverns
+  -Beware of slippery terrain
+  -Ice ore"
+alignment = 0
+
+[node name="CrystalCaveButton" type="Button" parent="CenterPanel/SelectDestinationPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Crystal caverns
+  -Electronics may malfunction
+  -Crystal ore"
+alignment = 0
+
+[node name="DestinationSelectedPanel" type="PanelContainer" parent="CenterPanel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterPanel/DestinationSelectedPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterPanel/DestinationSelectedPanel/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterPanel/DestinationSelectedPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Current location:"
+
+[node name="LocationLabel" type="Label" parent="CenterPanel/DestinationSelectedPanel/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cavern"
+horizontal_alignment = 1
+
+[node name="DeployBottomBar" type="MarginContainer" parent="."]
+modulate = Color(1.0569379, 1.0569379, 1.0569379, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -249.0
+offset_right = 230.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="DeployBottomBar"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="DeployBottomBar/PanelContainer"]
+layout_mode = 2
+
+[node name="DeployButton" type="Button" parent="DeployBottomBar/PanelContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "DEPLOY 
+[20 energy]"
+
+[node name="Bloom" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tnlw7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="PostProcess" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gyjrh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

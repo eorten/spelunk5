@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbqb74u3yrwp8"]
+
+[ext_resource type="Script" uid="uid://di5j3n41x2rxk" path="res://characters/input_controller/crawler.gd" id="1_ys1mq"]
+[ext_resource type="Script" uid="uid://b0fbpt3lbgtje" path="res://characters/gravity.gd" id="2_xv41u"]
+[ext_resource type="Script" uid="uid://cs6pm4nixudgl" path="res://characters/ground_mover.gd" id="3_m33hn"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y36n6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8tme"]
+size = Vector2(8, 8)
+
+[node name="Crawler" type="CharacterBody2D"]
+script = ExtResource("1_ys1mq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = SubResource("PlaceholderTexture2D_y36n6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j8tme")
+
+[node name="Gravity" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("2_xv41u")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://b0fbpt3lbgtje"
+
+[node name="GroundMover" type="Node" parent="." node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+script = ExtResource("3_m33hn")
+speed = 7.0
+body = NodePath("..")
+metadata/_custom_type_script = "uid://cs6pm4nixudgl"
+
+[node name="RightRay" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+target_position = Vector2(6, 0)
+
+[node name="RightGroundRay" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(3, 3)
+target_position = Vector2(0, 3)
+
+[node name="LeftRay" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+target_position = Vector2(-6, 0)
+
+[node name="LeftGroundRay" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-3, 3)
+target_position = Vector2(0, 3)

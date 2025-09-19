@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BiomeData" load_steps=6 format=3 uid="uid://64qb0lbringj"]
+
+[ext_resource type="Script" uid="uid://bqboe44j4woi5" path="res://game/world/world_generator/biome_data_entry.gd" id="1_477lk"]
+[ext_resource type="Resource" uid="uid://bn5uwtoapi384" path="res://biomes/base_biome/data/ore_common.tres" id="2_mltwp"]
+[ext_resource type="Resource" uid="uid://dncjc1x50per6" path="res://biomes/base_biome/data/ore_uncommon.tres" id="3_m6yki"]
+[ext_resource type="Resource" uid="uid://xku0jwrmmiyv" path="res://biomes/base_biome/data/ore_rare.tres" id="4_qy2jx"]
+[ext_resource type="Script" uid="uid://dnc4bag1jtemq" path="res://game/world/world_generator/biome_data.gd" id="5_kgwr1"]
+
+[resource]
+script = ExtResource("5_kgwr1")
+biome_dict = Dictionary[int, ExtResource("1_477lk")]({
+3: ExtResource("2_mltwp"),
+4: ExtResource("3_m6yki"),
+5: ExtResource("4_qy2jx")
+})
+metadata/_custom_type_script = "uid://dnc4bag1jtemq"

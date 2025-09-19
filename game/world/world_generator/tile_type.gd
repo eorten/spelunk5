@@ -1,0 +1,2 @@
+class_name TileType extends Object
+enum Type{AIR, DIRT, STONE, ORE_COMMON, ORE_UNCOMMON, ORE_RARE, ORE_BIOME, BG, BORDER, PLACEABLE}

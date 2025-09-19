@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dh1otrxy31gke"]
+
+[ext_resource type="Script" uid="uid://dufydpph45sn7" path="res://characters/input_controller/player.gd" id="1_ixbpm"]
+[ext_resource type="Script" uid="uid://cs6pm4nixudgl" path="res://characters/ground_mover.gd" id="2_c6leb"]
+[ext_resource type="Script" uid="uid://b0fbpt3lbgtje" path="res://characters/gravity.gd" id="3_dirf7"]
+[ext_resource type="Script" uid="uid://df83tgk3w70up" path="res://characters/jumper.gd" id="4_idpv6"]
+[ext_resource type="Script" uid="uid://boc4vsfmxlpca" path="res://characters/health.gd" id="5_rpf03"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y36n6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8tme"]
+size = Vector2(6, 7)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_ixbpm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = SubResource("PlaceholderTexture2D_y36n6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_j8tme")
+
+[node name="GroundMover" type="Node" parent="." node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+script = ExtResource("2_c6leb")
+speed = 100.0
+body = NodePath("..")
+
+[node name="Gravity" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("3_dirf7")
+body = NodePath("..")
+
+[node name="Jumper" type="Node" parent="." node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+script = ExtResource("4_idpv6")
+jump_velocity = -200.0
+body = NodePath("..")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_rpf03")

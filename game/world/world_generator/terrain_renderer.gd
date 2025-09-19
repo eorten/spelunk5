@@ -1,0 +1,50 @@
+class_name TerrainRenderer extends Node
+
+@onready var bg_layer: TileMapLayer = %BGLayer
+@onready var base_tile_layer: TileMapLayer = %BaseTileLayer
+@onready var ore_layer: TileMapLayer = %OreLayer
+@onready var placeable_layer: Node2D = %PlaceableLayer
+
+#func get_world_cells() -> Dictionary[Vector2i, BiomeData.Types]:
+func render(world_dict:Dictionary, world_placeable_dict:Dictionary[Vector2i, PlaceableTypes.Type], placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene], biome_visuals:BiomeVisuals, base_biome_visuals:BiomeVisuals):
+	for pos:Vector2i in world_dict.keys():
+		bg_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.BG).atlas_coords)
+		match world_dict[pos]:
+			TileType.Type.BORDER:
+				base_tile_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.BORDER).atlas_coords)
+			
+			TileType.Type.AIR:
+				pass
+			
+			TileType.Type.PLACEABLE:
+				var placeable_type := world_placeable_dict.get(pos) as PlaceableTypes.Type
+				var placeable_prefab := placeable_registry.get(placeable_type) as PackedScene
+				var new_placeable := placeable_prefab.instantiate() as Node2D
+				placeable_layer.add_child(new_placeable)
+				new_placeable.position = World.global_to_cell(pos)
+				
+			TileType.Type.DIRT:
+				_place_dirt(pos,biome_visuals)
+			
+			TileType.Type.STONE:
+				base_tile_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.STONE).atlas_coords)
+			
+			TileType.Type.ORE_COMMON:
+				_place_dirt(pos,biome_visuals)
+				ore_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.ORE_COMMON).atlas_coords)
+			
+			TileType.Type.ORE_UNCOMMON:
+				_place_dirt(pos,biome_visuals)
+				ore_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.ORE_UNCOMMON).atlas_coords)
+				
+			TileType.Type.ORE_RARE:
+				_place_dirt(pos,biome_visuals)
+				ore_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.ORE_RARE).atlas_coords)
+				
+			TileType.Type.ORE_BIOME:
+				_place_dirt(pos,biome_visuals)
+				ore_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.ORE_BIOME).atlas_coords)
+				
+
+func _place_dirt(pos:Vector2, biome_visuals:BiomeVisuals):
+	base_tile_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.DIRT).atlas_coords)

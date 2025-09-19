@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BiomeVisuals" load_steps=7 format=3 uid="uid://clt2nb4md6hjw"]
+
+[ext_resource type="Script" uid="uid://eq6q62g41mhs" path="res://game/world/world_generator/biome_visual_entry.gd" id="1_xgdfr"]
+[ext_resource type="Resource" uid="uid://bcs56e1qqk84k" path="res://biomes/base_biome/visuals/ore_common.tres" id="2_jglba"]
+[ext_resource type="Resource" uid="uid://bh2gusg3orp5j" path="res://biomes/base_biome/visuals/ore_uncommon.tres" id="3_8wpsh"]
+[ext_resource type="Resource" uid="uid://pxlstx7s5xx7" path="res://biomes/base_biome/visuals/ore_rare.tres" id="4_56bfo"]
+[ext_resource type="Script" uid="uid://xux6op3puqil" path="res://game/world/world_generator/biome_visuals.gd" id="5_cqydc"]
+[ext_resource type="Resource" uid="uid://dj5tch35yo08e" path="res://biomes/base_biome/visuals/border.tres" id="5_jglba"]
+
+[resource]
+script = ExtResource("5_cqydc")
+biome_dict = Dictionary[int, ExtResource("1_xgdfr")]({
+3: ExtResource("2_jglba"),
+4: ExtResource("3_8wpsh"),
+5: ExtResource("4_56bfo"),
+8: ExtResource("5_jglba")
+})
+metadata/_custom_type_script = "uid://xux6op3puqil"

@@ -1,0 +1,200 @@
+[gd_scene load_steps=21 format=3 uid="uid://b8hbjfvxnb4wq"]
+
+[ext_resource type="Script" uid="uid://dpeiskorxqkak" path="res://game/game.gd" id="1_hb504"]
+[ext_resource type="LabelSettings" uid="uid://c0vd5bbx35cax" path="res://theme/labels/body.tres" id="1_vasa2"]
+[ext_resource type="PackedScene" uid="uid://qhxwxybgxfc4" path="res://game/world/character_spawnpoint/spawnpoint.tscn" id="2_4cobl"]
+[ext_resource type="Script" uid="uid://dnc4bag1jtemq" path="res://game/world/world_generator/biome_data.gd" id="2_8bboj"]
+[ext_resource type="Script" uid="uid://c2futd6erilxg" path="res://game/ui/ui.gd" id="2_ee6o4"]
+[ext_resource type="LabelSettings" uid="uid://cbiksthdgq5sp" path="res://theme/labels/h1.tres" id="2_h7iqs"]
+[ext_resource type="Script" uid="uid://pjqowosrwu0j" path="res://game/ui/main_menu_screen/main_menu_screen.gd" id="3_4cobl"]
+[ext_resource type="Resource" uid="uid://c81626yhwrbcp" path="res://biomes/caves/cave_data.tres" id="3_hb504"]
+[ext_resource type="Script" uid="uid://cc5l16atu2cl3" path="res://game/world/world_generator/terrain_renderer.gd" id="3_j8tme"]
+[ext_resource type="Resource" uid="uid://vrbnafowwahy" path="res://biomes/caves/cave_visuals.tres" id="5_ee6o4"]
+[ext_resource type="Script" uid="uid://xux6op3puqil" path="res://game/world/world_generator/biome_visuals.gd" id="5_jucfl"]
+[ext_resource type="Script" uid="uid://fakratwk737w" path="res://game/world/world_root.gd" id="6_ln7ps"]
+[ext_resource type="Texture2D" uid="uid://bdgxhhec4ydqt" path="res://textures/terrain/biome_sheet.png" id="7_vsp63"]
+[ext_resource type="PackedScene" uid="uid://c34ikudpsdehf" path="res://game/ui/terminal_menu_screen/terminal_menu_screen.tscn" id="8_mhvfb"]
+[ext_resource type="PackedScene" uid="uid://dh1otrxy31gke" path="res://characters/player/player.tscn" id="15_4cobl"]
+[ext_resource type="Resource" uid="uid://64qb0lbringj" path="res://biomes/base_biome/base_data.tres" id="16_q52ks"]
+[ext_resource type="Resource" uid="uid://clt2nb4md6hjw" path="res://biomes/base_biome/base_visuals.tres" id="17_jucfl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b686c"]
+texture = ExtResource("7_vsp63")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:4/0 = 0
+3:4/0 = 0
+0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:5/0 = 0
+1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:5/0 = 0
+3:5/0 = 0
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSet" id="TileSet_u5opy"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_b686c")
+
+[sub_resource type="Environment" id="Environment_dxwpq"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.41
+
+[node name="Game" type="Node"]
+script = ExtResource("1_hb504")
+world_size = 128
+placeable_registry = Dictionary[int, PackedScene]({
+1: ExtResource("2_4cobl")
+})
+biomes_data_registry = Dictionary[int, ExtResource("2_8bboj")]({
+0: ExtResource("3_hb504")
+})
+biomes_visual_registry = Dictionary[int, ExtResource("5_jucfl")]({
+0: ExtResource("5_ee6o4")
+})
+
+[node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ee6o4")
+
+[node name="MainMenuScreen" type="Control" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_4cobl")
+
+[node name="ColorRect" type="ColorRect" parent="UI/MainMenuScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22143, 0.206403, 0.187808, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainMenuScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pading" type="Control" parent="UI/MainMenuScreen/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="UI/MainMenuScreen/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenuScreen/HBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -324.0
+offset_right = 111.0
+offset_bottom = 324.0
+grow_vertical = 2
+alignment = 1
+
+[node name="StartGameButton" type="Button" parent="UI/MainMenuScreen/HBoxContainer/Control2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PLAY"
+
+[node name="Label2" type="Label" parent="UI/MainMenuScreen/HBoxContainer/Control2/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+label_settings = ExtResource("1_vasa2")
+
+[node name="Label3" type="Label" parent="UI/MainMenuScreen/HBoxContainer/Control2/VBoxContainer"]
+layout_mode = 2
+text = "CREDITS"
+label_settings = ExtResource("1_vasa2")
+
+[node name="Label4" type="Label" parent="UI/MainMenuScreen/HBoxContainer/Control2/VBoxContainer"]
+layout_mode = 2
+text = "QUIT"
+label_settings = ExtResource("1_vasa2")
+
+[node name="Label" type="Label" parent="UI/MainMenuScreen/HBoxContainer/Control2"]
+layout_mode = 1
+offset_right = 117.0
+offset_bottom = 141.0
+text = "MUST
+go
+DEEPER"
+label_settings = ExtResource("2_h7iqs")
+horizontal_alignment = 1
+
+[node name="TerminalMenuScreen" parent="UI" instance=ExtResource("8_mhvfb")]
+unique_name_in_owner = true
+
+[node name="WorldRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_ln7ps")
+base_biome_data = ExtResource("16_q52ks")
+base_biome_visuals = ExtResource("17_jucfl")
+player_prefab = ExtResource("15_4cobl")
+
+[node name="TerrainRenderer" type="Node2D" parent="WorldRoot"]
+unique_name_in_owner = true
+script = ExtResource("3_j8tme")
+
+[node name="BGLayer" type="TileMapLayer" parent="WorldRoot/TerrainRenderer"]
+unique_name_in_owner = true
+tile_set = SubResource("TileSet_u5opy")
+
+[node name="BaseTileLayer" type="TileMapLayer" parent="WorldRoot/TerrainRenderer"]
+unique_name_in_owner = true
+tile_set = SubResource("TileSet_u5opy")
+
+[node name="OreLayer" type="TileMapLayer" parent="WorldRoot/TerrainRenderer"]
+unique_name_in_owner = true
+tile_set = SubResource("TileSet_u5opy")
+
+[node name="PlaceableLayer" type="Node2D" parent="WorldRoot/TerrainRenderer"]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="WorldRoot"]
+position = Vector2(573, 405)
+zoom = Vector2(0.77, 0.77)
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="MiningSystem" type="Node" parent="Systems"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dxwpq")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BiomeDataEntry" load_steps=3 format=3 uid="uid://dncjc1x50per6"]
+
+[ext_resource type="Script" uid="uid://bqboe44j4woi5" path="res://game/world/world_generator/biome_data_entry.gd" id="1_03blc"]
+[ext_resource type="FastNoiseLite" uid="uid://bjypp1p6oy84i" path="res://biomes/noise_maps/uncommon_mat.tres" id="1_emh15"]
+
+[resource]
+script = ExtResource("1_03blc")
+map = ExtResource("1_emh15")
+threshold = 0.53
+metadata/_custom_type_script = "uid://bqboe44j4woi5"

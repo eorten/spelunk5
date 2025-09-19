@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BiomeVisualEntry" load_steps=2 format=3 uid="uid://cb67awsjqn3fc"]
+
+[ext_resource type="Script" uid="uid://eq6q62g41mhs" path="res://game/world/world_generator/biome_visual_entry.gd" id="1_ih6f4"]
+
+[resource]
+script = ExtResource("1_ih6f4")
+atlas_coords = Vector2i(2, 1)
+metadata/_custom_type_script = "uid://eq6q62g41mhs"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BiomeData" load_steps=5 format=3 uid="uid://c81626yhwrbcp"]
+
+[ext_resource type="Script" uid="uid://bqboe44j4woi5" path="res://game/world/world_generator/biome_data_entry.gd" id="1_hv03h"]
+[ext_resource type="Script" uid="uid://dnc4bag1jtemq" path="res://game/world/world_generator/biome_data.gd" id="2_ddmi4"]
+[ext_resource type="Resource" uid="uid://n4ypgbjir8ta" path="res://biomes/caves/data/dirt.tres" id="2_qy742"]
+[ext_resource type="Resource" uid="uid://bnne2veo0wci8" path="res://biomes/caves/data/stone.tres" id="3_4k7w1"]
+
+[resource]
+script = ExtResource("2_ddmi4")
+biome_dict = Dictionary[int, ExtResource("1_hv03h")]({
+1: ExtResource("2_qy742"),
+2: ExtResource("3_4k7w1")
+})
+metadata/_custom_type_script = "uid://dnc4bag1jtemq"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BiomeVisuals" load_steps=6 format=3 uid="uid://vrbnafowwahy"]
+
+[ext_resource type="Script" uid="uid://eq6q62g41mhs" path="res://game/world/world_generator/biome_visual_entry.gd" id="1_mejbg"]
+[ext_resource type="Resource" uid="uid://s12cfkudhhmn" path="res://biomes/caves/visuals/dirt.tres" id="2_0wnfe"]
+[ext_resource type="Script" uid="uid://xux6op3puqil" path="res://game/world/world_generator/biome_visuals.gd" id="2_r2vlt"]
+[ext_resource type="Resource" uid="uid://cqjyn0ealta4h" path="res://biomes/caves/visuals/stone.tres" id="3_toa20"]
+[ext_resource type="Resource" uid="uid://cb67awsjqn3fc" path="res://biomes/caves/visuals/bg.tres" id="4_ho8mx"]
+
+[resource]
+script = ExtResource("2_r2vlt")
+biome_dict = Dictionary[int, ExtResource("1_mejbg")]({
+1: ExtResource("2_0wnfe"),
+2: ExtResource("3_toa20"),
+7: ExtResource("4_ho8mx")
+})
+metadata/_custom_type_script = "uid://xux6op3puqil"
