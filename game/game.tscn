@@ -192,9 +192,5 @@ unique_name_in_owner = true
 position = Vector2(573, 405)
 zoom = Vector2(0.77, 0.77)
 
-[node name="Systems" type="Node" parent="."]
-
-[node name="MiningSystem" type="Node" parent="Systems"]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dxwpq")
