@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b8hbjfvxnb4wq"]
+[gd_scene load_steps=29 format=3 uid="uid://b8hbjfvxnb4wq"]
 
 [ext_resource type="Script" uid="uid://dpeiskorxqkak" path="res://game/game.gd" id="1_hb504"]
 [ext_resource type="LabelSettings" uid="uid://c0vd5bbx35cax" path="res://theme/labels/body.tres" id="1_vasa2"]
@@ -14,9 +14,45 @@
 [ext_resource type="Script" uid="uid://fakratwk737w" path="res://game/world/world_root.gd" id="6_ln7ps"]
 [ext_resource type="Texture2D" uid="uid://bdgxhhec4ydqt" path="res://textures/terrain/biome_sheet.png" id="7_vsp63"]
 [ext_resource type="PackedScene" uid="uid://c34ikudpsdehf" path="res://game/ui/terminal_menu_screen/terminal_menu_screen.tscn" id="8_mhvfb"]
+[ext_resource type="Theme" uid="uid://qbakscdd8o1p" path="res://theme/default.tres" id="12_u8s88"]
+[ext_resource type="Texture2D" uid="uid://mrtivuyhsqlt" path="res://textures/Corners.png" id="13_dxwpq"]
+[ext_resource type="Script" uid="uid://cnk08vde7jw8i" path="res://game/ui/hud_screen/hud_screen.gd" id="13_mhvfb"]
 [ext_resource type="PackedScene" uid="uid://dh1otrxy31gke" path="res://characters/player/player.tscn" id="15_4cobl"]
 [ext_resource type="Resource" uid="uid://64qb0lbringj" path="res://biomes/base_biome/base_data.tres" id="16_q52ks"]
 [ext_resource type="Resource" uid="uid://clt2nb4md6hjw" path="res://biomes/base_biome/base_visuals.tres" id="17_jucfl"]
+[ext_resource type="Shader" uid="uid://bj20fdbqsa2qh" path="res://theme/post_process/bloom.gdshader" id="18_pxxsx"]
+[ext_resource type="Shader" uid="uid://dqlays4pv4t8g" path="res://theme/post_process/crt.gdshader" id="19_u8s88"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mhvfb"]
+texture = ExtResource("13_dxwpq")
+modulate_color = Color(1, 0.5686275, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxwpq"]
+shader = ExtResource("18_pxxsx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhvfb"]
+shader = ExtResource("19_u8s88")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.5850000277875
+shader_parameter/scanlines_width = 0.35600001691
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(200, 200)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.745
+shader_parameter/roll_size = 6.87200032642
+shader_parameter/roll_variation = 4.64800021752012
+shader_parameter/distort_intensity = 0.0030000001425
+shader_parameter/noise_opacity = 0.110000005225
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.006000000285
+shader_parameter/aberration = 0.00500004773750006
+shader_parameter/brightness = 2.21
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.730000034675
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b686c"]
 texture = ExtResource("7_vsp63")
@@ -79,13 +115,17 @@ biomes_data_registry = Dictionary[int, ExtResource("2_8bboj")]({
 biomes_visual_registry = Dictionary[int, ExtResource("5_jucfl")]({
 0: ExtResource("5_ee6o4")
 })
+base_boime_data = ExtResource("16_q52ks")
+base_boime_visuals = ExtResource("17_jucfl")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+layer = 10
 script = ExtResource("2_ee6o4")
 
 [node name="MainMenuScreen" type="Control" parent="UI"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,12 +201,124 @@ horizontal_alignment = 1
 
 [node name="TerminalMenuScreen" parent="UI" instance=ExtResource("8_mhvfb")]
 unique_name_in_owner = true
+visible = false
+
+[node name="HUDScreen" type="Control" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("12_u8s88")
+script = ExtResource("13_mhvfb")
+
+[node name="bg" type="Control" parent="UI/HUDScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUDScreen/bg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/HUDScreen/bg/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mhvfb")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUDScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUDScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "rec"
+
+[node name="Label3" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Cam 01"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="BatteryLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Battery: 100%"
+
+[node name="HPLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Integrity: 100%"
+
+[node name="TimerLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "00:00:00"
+
+[node name="PostProcess" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Bloom" type="ColorRect" parent="UI/PostProcess"]
+material = SubResource("ShaderMaterial_dxwpq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="UI/PostProcess"]
+copy_mode = 2
+
+[node name="PostProcess" type="ColorRect" parent="UI/PostProcess"]
+material = SubResource("ShaderMaterial_mhvfb")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="WorldRoot" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("6_ln7ps")
-base_biome_data = ExtResource("16_q52ks")
-base_biome_visuals = ExtResource("17_jucfl")
 player_prefab = ExtResource("15_4cobl")
 
 [node name="TerrainRenderer" type="Node2D" parent="WorldRoot"]
@@ -188,9 +340,8 @@ tile_set = SubResource("TileSet_u5opy")
 [node name="PlaceableLayer" type="Node2D" parent="WorldRoot/TerrainRenderer"]
 unique_name_in_owner = true
 
-[node name="Camera2D" type="Camera2D" parent="WorldRoot"]
-position = Vector2(573, 405)
-zoom = Vector2(0.77, 0.77)
+[node name="CanvasModulate" type="CanvasModulate" parent="WorldRoot"]
+color = Color(0, 0, 0, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dxwpq")

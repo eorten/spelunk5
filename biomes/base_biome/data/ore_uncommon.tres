@@ -7,4 +7,5 @@
 script = ExtResource("1_03blc")
 map = ExtResource("1_emh15")
 threshold = 0.53
+currency_value = 5
 metadata/_custom_type_script = "uid://bqboe44j4woi5"

@@ -9,16 +9,25 @@ var _biome_data:BiomeData
 var _biome_visuals:BiomeVisuals
 #endregion
 
+##region base
+#var _base_biome_data:BiomeData
+#var _base_biome_visuals:BiomeVisuals
+##endregion
+
 #region representatino
 var _world_cells:Dictionary[Vector2i, TileType.Type]
 var _world_placeables:Dictionary[Vector2i, PlaceableTypes.Type]
 var _spawnpoint:Vector2i #Globalpos
 #endregion
 
-func _init(size:int, biome_data:BiomeData, biome_visuals:BiomeVisuals) -> void:
+func _init(size:int, biome_data:BiomeData, biome_visuals:BiomeVisuals, base_biome_data:BiomeData, base_biome_visuals:BiomeVisuals) -> void:
+	#_biome_data = biome_data
+	#_biome_visuals = biome_visuals
 	_world_size = size
-	_biome_data = biome_data
-	_biome_visuals = biome_visuals
+	_biome_data = BiomeData.new()
+	_biome_visuals = BiomeVisuals.new()
+	_biome_data.biome_dict = biome_data.biome_dict.merged(base_biome_data.biome_dict)
+	_biome_visuals.biome_dict = biome_visuals.biome_dict.merged(base_biome_visuals.biome_dict)
 
 func set_world_cells(world_cells:Dictionary[Vector2i, TileType.Type]):
 	_world_cells = world_cells
@@ -51,7 +60,7 @@ func get_world_cells() -> Dictionary[Vector2i, TileType.Type]:
 func get_spawnpoint() -> Vector2i:
 	return _spawnpoint
 func get_biome_data() -> BiomeData:
-	return _biome_data
+	return _biome_data	
 func get_biome_visuals() -> BiomeVisuals:
 	return _biome_visuals
 func get_size() -> int:

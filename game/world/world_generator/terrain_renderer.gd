@@ -6,23 +6,22 @@ class_name TerrainRenderer extends Node
 @onready var placeable_layer: Node2D = %PlaceableLayer
 
 #func get_world_cells() -> Dictionary[Vector2i, BiomeData.Types]:
-func render(world_dict:Dictionary, world_placeable_dict:Dictionary[Vector2i, PlaceableTypes.Type], placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene], biome_visuals:BiomeVisuals, base_biome_visuals:BiomeVisuals):
+func render(world_dict:Dictionary, world_placeable_dict:Dictionary[Vector2i, PlaceableTypes.Type], placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene], biome_visuals:BiomeVisuals):
 	for pos:Vector2i in world_dict.keys():
 		bg_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.BG).atlas_coords)
 		re_render_cell(pos, 
 			world_dict, 
 			world_placeable_dict, 
 			placeable_registry, 
-			biome_visuals, 
-			base_biome_visuals
+			biome_visuals
 		)
 
-func re_render_cell(pos:Vector2i, world_dict:Dictionary, world_placeable_dict:Dictionary[Vector2i, PlaceableTypes.Type], placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene], biome_visuals:BiomeVisuals, base_biome_visuals:BiomeVisuals):
+func re_render_cell(pos:Vector2i, world_dict:Dictionary, world_placeable_dict:Dictionary[Vector2i, PlaceableTypes.Type], placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene], biome_visuals:BiomeVisuals):
 	base_tile_layer.set_cell(pos)
 	ore_layer.set_cell(pos)
 	match world_dict[pos]:
 		TileType.Type.BORDER:
-			base_tile_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.BORDER).atlas_coords)
+			base_tile_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.BORDER).atlas_coords)
 		
 		TileType.Type.AIR:
 			pass
@@ -42,15 +41,15 @@ func re_render_cell(pos:Vector2i, world_dict:Dictionary, world_placeable_dict:Di
 		
 		TileType.Type.ORE_COMMON:
 			_place_dirt(pos,biome_visuals)
-			ore_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.ORE_COMMON).atlas_coords)
+			ore_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.ORE_COMMON).atlas_coords)
 		
 		TileType.Type.ORE_UNCOMMON:
 			_place_dirt(pos,biome_visuals)
-			ore_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.ORE_UNCOMMON).atlas_coords)
+			ore_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.ORE_UNCOMMON).atlas_coords)
 			
 		TileType.Type.ORE_RARE:
 			_place_dirt(pos,biome_visuals)
-			ore_layer.set_cell(pos, 0, base_biome_visuals.get_entry(TileType.Type.ORE_RARE).atlas_coords)
+			ore_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.ORE_RARE).atlas_coords)
 			
 		TileType.Type.ORE_BIOME:
 			_place_dirt(pos,biome_visuals)

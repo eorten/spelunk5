@@ -1,6 +1,7 @@
 class_name BiomeDataEntry extends Resource
 @export var map:FastNoiseLite
 @export var threshold:float = 0
+@export var currency_value:int = 0
 
 func get_grid(grid_size:int) -> BitMap:
 	var res := BitMap.new()

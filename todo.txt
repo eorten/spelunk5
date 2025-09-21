@@ -1,0 +1,1 @@
+abstract away base biome, add it to world, have dict in game

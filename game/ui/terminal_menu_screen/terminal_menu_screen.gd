@@ -8,6 +8,7 @@ class_name TerminalMenuScreen extends Node
 
 @onready var select_destination_panel: PanelContainer = %SelectDestinationPanel
 @onready var destination_selected_panel: PanelContainer = %DestinationSelectedPanel
+@onready var terminal_text: Label = %TerminalText
 
 @onready var location_label: Label = %LocationLabel
 
@@ -20,11 +21,14 @@ func _ready() -> void:
 	crystal_cave_button.pressed.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.CRYSTAL))
 	deploy_button.pressed.connect(EventBus.on_button_pressed_deploy.emit)
 	
-	Viewmodel.terrain_menu_screen_vm.state_changed.connect(func(new_state:TerminalMenuState):
+	Viewmodel.terminal_menu_screen_vm.state_changed.connect(func(new_state:TerminalMenuState):
 		state = new_state
 		select_destination_panel.visible = (state.center_panel_state == TerminalMenuState.CenterPanelState.SELECT_DESTINATION)
 		destination_selected_panel.visible = (state.center_panel_state == TerminalMenuState.CenterPanelState.DESTINATION_SELECTED)
 		location_label.text = BiomeTypes.Type.keys()[state.selected_destination]
+	)
+	Viewmodel.terminal_vm.state_changed.connect(func(new_state:TerminalState):
+		terminal_text.text = new_state.text
 	)
 
 #func set_state(new_state:TerminalMenuState):

@@ -1,9 +1,6 @@
 class_name TerrainGenerator extends RefCounted
 
 ## Base biome: Biome with global ores
-var _base_biome_data:BiomeData
-func _init(base_biome_data:BiomeData) -> void:
-	_base_biome_data = base_biome_data 
 
 ## Biome: Biome with unique ores and terrrain
 func create_terrain(size:int, biome:BiomeData) -> Dictionary[Vector2i, TileType.Type]:
@@ -19,9 +16,9 @@ func create_terrain(size:int, biome:BiomeData) -> Dictionary[Vector2i, TileType.
 	#endregion
 	
 	#region Ore grids
-	var common_ore_grid := _base_biome_data.get_entry(TileType.Type.ORE_COMMON).get_grid(size) as BitMap
-	var uncommon_ore_grid := _base_biome_data.get_entry(TileType.Type.ORE_UNCOMMON).get_grid(size) as BitMap
-	var rare_ore_grid := _base_biome_data.get_entry(TileType.Type.ORE_RARE).get_grid(size) as BitMap
+	var common_ore_grid := biome.get_entry(TileType.Type.ORE_COMMON).get_grid(size) as BitMap
+	var uncommon_ore_grid := biome.get_entry(TileType.Type.ORE_UNCOMMON).get_grid(size) as BitMap
+	var rare_ore_grid := biome.get_entry(TileType.Type.ORE_RARE).get_grid(size) as BitMap
 	var biome_ore = biome.get_entry(TileType.Type.ORE_BIOME)
 	
 	#Set grid if there exits biome ore

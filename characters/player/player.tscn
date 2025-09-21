@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dh1otrxy31gke"]
+[gd_scene load_steps=10 format=3 uid="uid://dh1otrxy31gke"]
 
-[ext_resource type="Script" uid="uid://dufydpph45sn7" path="res://characters/input_controller/player.gd" id="1_ixbpm"]
+[ext_resource type="Script" uid="uid://dufydpph45sn7" path="res://characters/input_controller/player_controller.gd" id="1_ixbpm"]
 [ext_resource type="Script" uid="uid://cs6pm4nixudgl" path="res://characters/ground_mover.gd" id="2_c6leb"]
 [ext_resource type="Script" uid="uid://b0fbpt3lbgtje" path="res://characters/gravity.gd" id="3_dirf7"]
 [ext_resource type="Script" uid="uid://df83tgk3w70up" path="res://characters/jumper.gd" id="4_idpv6"]
@@ -9,10 +9,19 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y36n6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8tme"]
-size = Vector2(6, 7)
+size = Vector2(6, 6.25)
 
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 0
+[sub_resource type="Gradient" id="Gradient_ixbpm"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c6leb"]
+gradient = SubResource("Gradient_ixbpm")
+fill = 1
+fill_from = Vector2(0.5, 0.48290598)
+fill_to = Vector2(0.8717949, 0.82905984)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_ixbpm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,13 +29,13 @@ scale = Vector2(8, 8)
 texture = SubResource("PlaceholderTexture2D_y36n6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(4, 5.125)
 shape = SubResource("RectangleShape2D_j8tme")
 
 [node name="GroundMover" type="Node" parent="." node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
 script = ExtResource("2_c6leb")
-speed = 100.0
+speed = 50.0
 body = NodePath("..")
 
 [node name="Gravity" type="Node" parent="." node_paths=PackedStringArray("body")]
@@ -41,3 +50,14 @@ body = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_rpf03")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(4, 4)
+zoom = Vector2(6, 6)
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_c6leb")
+texture_scale = 2.0

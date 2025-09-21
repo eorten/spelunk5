@@ -50,8 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0.19434929, 0.19434926, 0.19434926, 1)
+color = Color(0.22143, 0.206403, 0.187808, 1)
 
 [node name="MenuSideBar" type="MarginContainer" parent="."]
 modulate = Color(1.0569379, 1.0569379, 1.0569379, 1)
@@ -59,6 +58,7 @@ layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 250.0
+offset_bottom = -61.0
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MenuSideBar"]
@@ -81,6 +81,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -250.0
+offset_bottom = -60.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -190,6 +191,25 @@ layout_mode = 2
 text = "Cavern"
 horizontal_alignment = 1
 
+[node name="TerminalPanel" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="TerminalPanel"]
+layout_mode = 2
+
+[node name="TerminalText" type="Label" parent="TerminalPanel/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "testing"
+
 [node name="DeployBottomBar" type="MarginContainer" parent="."]
 modulate = Color(1.0569379, 1.0569379, 1.0569379, 1)
 layout_mode = 1
@@ -201,6 +221,7 @@ anchor_bottom = 1.0
 offset_left = -230.0
 offset_top = -249.0
 offset_right = 230.0
+offset_bottom = -62.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -216,7 +237,17 @@ layout_mode = 2
 text = "DEPLOY 
 [20 energy]"
 
-[node name="Bloom" type="ColorRect" parent="."]
+[node name="PostProcess" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Bloom" type="ColorRect" parent="PostProcess"]
 material = SubResource("ShaderMaterial_tnlw7")
 layout_mode = 1
 anchors_preset = 15
@@ -226,10 +257,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="PostProcess"]
 copy_mode = 2
 
-[node name="PostProcess" type="ColorRect" parent="."]
+[node name="PostProcess" type="ColorRect" parent="PostProcess"]
 material = SubResource("ShaderMaterial_gyjrh")
 layout_mode = 1
 anchors_preset = 15
