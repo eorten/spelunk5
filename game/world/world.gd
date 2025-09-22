@@ -36,7 +36,9 @@ func set_world_cells(world_cells:Dictionary[Vector2i, TileType.Type]):
 
 func remove_cell(pos:Vector2i):
 	_world_cells.set(pos, TileType.Type.AIR)
+	print("WORLD:has placeable?")
 	if _world_placeables.has(pos):
+		print("yes")
 		_world_placeables.set(pos, PlaceableTypes.Type.EMPTY)
 	on_cell_changed.emit(pos)
 

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmkhlje4nyh1o"]
+
+[ext_resource type="Texture2D" uid="uid://dixjq4t2xgx6y" path="res://placeables/lamp_tex.tres" id="1_3qjsl"]
+[ext_resource type="Texture2D" uid="uid://cruhi523yndhj" path="res://textures/light_tex.tres" id="2_ci2a8"]
+
+[node name="Lamp" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 4)
+texture = ExtResource("1_3qjsl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4, 4)
+energy = 0.5
+blend_mode = 2
+texture = ExtResource("2_ci2a8")
+texture_scale = 0.5

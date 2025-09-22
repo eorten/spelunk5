@@ -4,6 +4,7 @@ class_name TerrainRenderer extends Node
 @onready var base_tile_layer: TileMapLayer = %BaseTileLayer
 @onready var ore_layer: TileMapLayer = %OreLayer
 @onready var placeable_layer: Node2D = %PlaceableLayer
+var placeable_dict: Dictionary[Vector2i, Node2D]
 
 #func get_world_cells() -> Dictionary[Vector2i, BiomeData.Types]:
 func render(world_dict:Dictionary, world_placeable_dict:Dictionary[Vector2i, PlaceableTypes.Type], placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene], biome_visuals:BiomeVisuals):
@@ -24,12 +25,18 @@ func re_render_cell(pos:Vector2i, world_dict:Dictionary, world_placeable_dict:Di
 			base_tile_layer.set_cell(pos, 0, biome_visuals.get_entry(TileType.Type.BORDER).atlas_coords)
 		
 		TileType.Type.AIR:
-			pass
+			if placeable_dict.get(pos, null):
+				placeable_dict[pos].queue_free()
 		
 		TileType.Type.PLACEABLE:
+			#remove old
+			#if placeable_dict.get(pos, null):
+				#placeable_dict[pos].queue_free()
+				
 			var placeable_type := world_placeable_dict.get(pos) as PlaceableTypes.Type
 			var placeable_prefab := placeable_registry.get(placeable_type) as PackedScene
 			var new_placeable := placeable_prefab.instantiate() as Node2D
+			placeable_dict[pos] = new_placeable
 			placeable_layer.add_child(new_placeable)
 			new_placeable.position = World.cell_to_global(pos)
 			

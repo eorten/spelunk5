@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8hbjfvxnb4wq"]
+[gd_scene load_steps=31 format=3 uid="uid://b8hbjfvxnb4wq"]
 
 [ext_resource type="Script" uid="uid://dpeiskorxqkak" path="res://game/game.gd" id="1_hb504"]
 [ext_resource type="LabelSettings" uid="uid://c0vd5bbx35cax" path="res://theme/labels/body.tres" id="1_vasa2"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cl75l4diawb3x" path="res://placeables/ladder.tscn" id="3_5e03w"]
 [ext_resource type="Resource" uid="uid://c81626yhwrbcp" path="res://biomes/caves/cave_data.tres" id="3_hb504"]
 [ext_resource type="Script" uid="uid://cc5l16atu2cl3" path="res://game/world/world_generator/terrain_renderer.gd" id="3_j8tme"]
+[ext_resource type="PackedScene" uid="uid://bmkhlje4nyh1o" path="res://placeables/lamp.tscn" id="4_leid8"]
 [ext_resource type="Resource" uid="uid://vrbnafowwahy" path="res://biomes/caves/cave_visuals.tres" id="5_ee6o4"]
 [ext_resource type="Script" uid="uid://xux6op3puqil" path="res://game/world/world_generator/biome_visuals.gd" id="5_jucfl"]
 [ext_resource type="Script" uid="uid://fakratwk737w" path="res://game/world/world_root.gd" id="6_ln7ps"]
@@ -110,7 +111,7 @@ world_size = 128
 placeable_registry = Dictionary[int, PackedScene]({
 1: ExtResource("2_4cobl"),
 2: ExtResource("3_5e03w"),
-3: null
+3: ExtResource("4_leid8")
 })
 shop = Dictionary[int, int]({
 2: 5,
