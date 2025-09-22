@@ -7,4 +7,9 @@ signal on_button_pressed_start_game
 #move
 signal on_button_pressed_move_location(biome:BiomeTypes.Type)
 signal on_button_pressed_deploy
+#change screen
+signal on_button_pressed_open_shop
+signal on_button_pressed_open_move
+#buy item
+signal on_button_pressed_buy(placeable:PlaceableTypes.Type)
 #endregion

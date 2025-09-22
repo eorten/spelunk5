@@ -109,6 +109,10 @@ world_size = 128
 placeable_registry = Dictionary[int, PackedScene]({
 1: ExtResource("2_4cobl")
 })
+shop = Dictionary[int, int]({
+2: 5,
+3: 10
+})
 biomes_data_registry = Dictionary[int, ExtResource("2_8bboj")]({
 0: ExtResource("3_hb504")
 })
@@ -201,10 +205,10 @@ horizontal_alignment = 1
 
 [node name="TerminalMenuScreen" parent="UI" instance=ExtResource("8_mhvfb")]
 unique_name_in_owner = true
+visible = false
 
 [node name="HUDScreen" type="Control" parent="UI"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -293,8 +297,14 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
+[node name="PlaceableLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "test"
+vertical_alignment = 1
+
 [node name="PostProcess" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

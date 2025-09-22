@@ -18,7 +18,11 @@ func add_items(item, amount):
 		
 func get_item(item):
 	return _inventory.get(item, 0)
-
+func reduce_item(item, amount):
+	var prev = get_item(item)
+	_inventory.set(item, prev-amount)
+	
+	return _inventory.get(item, 0)
 func get_inventory() -> Dictionary:
 	return _inventory
 

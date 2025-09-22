@@ -5,6 +5,7 @@ signal on_cell_changed(pos)
 
 #region data
 var _world_size:int
+var _biome_type:BiomeTypes.Type
 var _biome_data:BiomeData
 var _biome_visuals:BiomeVisuals
 #endregion
@@ -20,9 +21,10 @@ var _world_placeables:Dictionary[Vector2i, PlaceableTypes.Type]
 var _spawnpoint:Vector2i #Globalpos
 #endregion
 
-func _init(size:int, biome_data:BiomeData, biome_visuals:BiomeVisuals, base_biome_data:BiomeData, base_biome_visuals:BiomeVisuals) -> void:
+func _init(size:int, biome_data:BiomeData, biome_visuals:BiomeVisuals, base_biome_data:BiomeData, base_biome_visuals:BiomeVisuals, biome_type:BiomeTypes.Type) -> void:
 	#_biome_data = biome_data
 	#_biome_visuals = biome_visuals
+	_biome_type = biome_type
 	_world_size = size
 	_biome_data = BiomeData.new()
 	_biome_visuals = BiomeVisuals.new()

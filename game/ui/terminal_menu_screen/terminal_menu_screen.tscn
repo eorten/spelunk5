@@ -64,14 +64,26 @@ grow_vertical = 2
 [node name="PanelContainer" type="PanelContainer" parent="MenuSideBar"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuSideBar/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuSideBar/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MenuSideBar/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "MENU
-----
-> Robots
-> Move
-> Crafting"
-vertical_alignment = 1
+----"
+
+[node name="MoveButton" type="Button" parent="MenuSideBar/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Move"
+alignment = 0
+
+[node name="ShopButton" type="Button" parent="MenuSideBar/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Shop"
+alignment = 0
 
 [node name="ResourceSideBar" type="MarginContainer" parent="."]
 modulate = Color(1.0569379, 1.0569379, 1.0569379, 1)
@@ -147,6 +159,7 @@ grow_vertical = 2
 
 [node name="SelectDestinationPanel" type="PanelContainer" parent="CenterPanel"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterPanel/SelectDestinationPanel"]
@@ -221,6 +234,20 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Cavern"
 horizontal_alignment = 1
+
+[node name="ShopPanel" type="PanelContainer" parent="CenterPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ShopItemContainer" type="VBoxContainer" parent="CenterPanel/ShopPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterPanel/ShopPanel/ShopItemContainer"]
+layout_mode = 2
+text = "SHOP
+----"
 
 [node name="TerminalPanel" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(460, 0)

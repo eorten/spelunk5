@@ -3,6 +3,7 @@ class_name HUDScreen extends Control
 @onready var hp_label: Label = %HPLabel
 @onready var timer_label: Label = %TimerLabel
 @onready var inventory_label: Label = %InventoryLabel
+@onready var placeable_label: Label = %PlaceableLabel
 
 func _ready() -> void:
 	Viewmodel.hud_vm.state_changed.connect(func(new_state:HUDState):
@@ -17,5 +18,9 @@ func _ready() -> void:
 		inventory_label.text = ""
 		for key in new_state.inventory_dict:
 			inventory_label.text += str(key) + ":" + str(new_state.inventory_dict[key]) + "\n"
+		
+		placeable_label.text = ""
+		for key in new_state.placeable_dict:
+			placeable_label.text += str(PlaceableTypes.Type.keys()[key]) + " x" + str(new_state.placeable_dict[key]) + "\n"
 			
 	)
