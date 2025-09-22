@@ -88,7 +88,8 @@ grow_vertical = 2
 [node name="PanelContainer" type="PanelContainer" parent="ResourceSideBar"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ResourceSideBar/PanelContainer"]
+[node name="RichTextLabel" type="Label" parent="ResourceSideBar/PanelContainer"]
+visible = false
 layout_mode = 2
 text = "RESOURCES
 ----
@@ -96,6 +97,36 @@ Currency: 20$
 Energy: 20%
 
 ORES:
+ice: 		12
+fire: 		8
+fungal: 	0
+crystal: 	19"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ResourceSideBar/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel" type="Label" parent="ResourceSideBar/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "RESOURCES
+----"
+vertical_alignment = 1
+
+[node name="EnergyLabel" type="Label" parent="ResourceSideBar/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Energy: 20%"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="ResourceSideBar/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 19.56)
+layout_mode = 2
+
+[node name="OreLabel" type="Label" parent="ResourceSideBar/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ORES:
 ice: 		12
 fire: 		8
 fungal: 	0

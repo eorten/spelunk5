@@ -12,6 +12,11 @@ class_name TerminalMenuScreen extends Node
 
 @onready var location_label: Label = %LocationLabel
 
+#region right bar
+@onready var energy_label: Label = %EnergyLabel
+@onready var ore_label: Label = %OreLabel
+#endregion
+
 var state:TerminalMenuState
 func _ready() -> void:
 	cave_button.pressed.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.CAVE))
@@ -29,6 +34,12 @@ func _ready() -> void:
 	)
 	Viewmodel.terminal_vm.state_changed.connect(func(new_state:TerminalState):
 		terminal_text.text = new_state.text
+	)
+	Viewmodel.terminal_menu_right_vm.state_changed.connect(func(new_state:TerminalMenuRightState):
+		energy_label.text = "Energy: " + str(new_state.energy)
+		ore_label.text = ""
+		for k in new_state.ores:
+			ore_label.text += str(k) + ": " + str(new_state.ores[k])
 	)
 
 #func set_state(new_state:TerminalMenuState):

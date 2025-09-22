@@ -12,7 +12,11 @@ func try_mine_at(global_pos:Vector2i , inventory:Inventory):
 		var ore = null
 		if _world.get_biome_data().biome_dict.has(tile_type):
 			ore = _world.get_biome_data().get_entry(tile_type) as BiomeDataEntry
-		
+			
 		if ore:
-			inventory.add_items("currency", ore.currency_value)
+			if tile_type == TileType.Type.ORE_BIOME:
+				inventory.add_item(str(TileType.Type.keys()[tile_type]))
+			else:
+				inventory.add_items("CURRENCY", ore.currency_value)
+				
 		_world.remove_cell(local_pos)

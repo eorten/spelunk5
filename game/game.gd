@@ -38,7 +38,8 @@ func _ready() -> void:
 		_mining_system = MiningSystem.new(_world)
 		world_root.initialize(_world, placeable_registry)
 		world_root.create_world()
-		_current_round_data = RoundData.new(-1)
+		_current_round_data = RoundData.new(-1, 120)
+		update_resource_ui()
 	)
 	
 	EventBus.on_button_pressed_deploy.connect(func():
@@ -56,10 +57,13 @@ func _ready() -> void:
 		_player = Player.new(.5 ,1)
 		_player.on_out_of_hp.connect(func():
 			end_run()
+			update_resource_ui()
 			Viewmodel.terminal_vm.set_state(TerminalState.new("robot destroyed due to excessive damage"))
 		)
 		_player.on_out_of_energy.connect(func():
 			end_run()
+			update_resource_ui()
+			
 			Viewmodel.terminal_vm.set_state(TerminalState.new("robot destroyed due to no energy"))
 		)
 		_player.on_take_damage.connect(func():
@@ -69,7 +73,14 @@ func _ready() -> void:
 	)
 	
 	GameEventBus.on_player_hatch_interacted.connect(func():
+		if _current_gamestate != GameState.PLAYING:return;
 		end_run()
+		print("ADD M")
+		_player_data.get_inventory().add_inventory(
+			_player.get_inventory()
+		)
+		update_resource_ui()
+		
 	)
 
 	GameEventBus.on_player_try_mine.connect(func(pos:Vector2i):
@@ -81,6 +92,16 @@ func _ready() -> void:
 	_player_data = PlayerData.new()
 	Viewmodel.ui_vm.set_state(
 		UIState.new(UIState.Screen.MAIN_MENU)
+	)
+	update_resource_ui()
+
+func update_resource_ui():
+	Viewmodel.terminal_menu_right_vm.set_state(
+		TerminalMenuRightState.new(
+			_player_data.get_inventory().get_item("currency"),
+			_current_round_data.get_current_energy() if _current_round_data else 0, 
+			_player_data.get_inventory().get_inventory()
+		)
 	)
 
 func end_run():
@@ -105,7 +126,7 @@ func end_run():
 func update_hud(player:Player):
 	var old_state := Viewmodel.hud_vm.get_state() as HUDState
 	Viewmodel.hud_vm.set_state(
-		HUDState.new(player.get_energy(), player.get_hp(), player.get_playtime())
+		HUDState.new(player.get_energy(), player.get_hp(), player.get_playtime(), player.get_inventory().get_inventory())
 	)
 
 func _process(delta: float) -> void:

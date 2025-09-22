@@ -201,10 +201,10 @@ horizontal_alignment = 1
 
 [node name="TerminalMenuScreen" parent="UI" instance=ExtResource("8_mhvfb")]
 unique_name_in_owner = true
-visible = false
 
 [node name="HUDScreen" type="Control" parent="UI"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,11 +246,21 @@ grow_vertical = 2
 [node name="MarginContainer" type="MarginContainer" parent="UI/HUDScreen/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+[node name="Label" type="VBoxContainer" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/Label"]
+layout_mode = 2
 text = "rec"
+
+[node name="TimerLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/Label"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "00:00:00"
 
 [node name="Label3" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
 layout_mode = 2
@@ -277,14 +287,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Integrity: 100%"
 
-[node name="TimerLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+[node name="InventoryLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-text = "00:00:00"
 
 [node name="PostProcess" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

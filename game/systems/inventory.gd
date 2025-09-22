@@ -24,4 +24,4 @@ func get_inventory() -> Dictionary:
 
 func add_inventory(to_add:Inventory):
 	for item in to_add.get_inventory().keys():
-		add_items(item, to_add[item])
+		add_items(item, to_add.get_inventory()[item])
