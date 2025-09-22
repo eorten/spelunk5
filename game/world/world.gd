@@ -44,7 +44,11 @@ func set_world_placeable(type:PlaceableTypes.Type, pos:Vector2i):
 	_world_cells[pos] = TileType.Type.PLACEABLE
 	_world_placeables[pos] = type
 	on_cell_changed.emit(pos)
-	
+
+func tile_is_air(pos:Vector2i):
+	var placeable = _world_placeables.get(pos, PlaceableTypes.Type.EMPTY)
+	var terrain = _world_cells.get(pos)
+	return placeable == PlaceableTypes.Type.EMPTY && terrain == TileType.Type.AIR
 
 func set_player_spawnpoint():
 	for pos:Vector2i in _world_cells.keys():

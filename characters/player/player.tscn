@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dh1otrxy31gke"]
+[gd_scene load_steps=11 format=3 uid="uid://dh1otrxy31gke"]
 
 [ext_resource type="Script" uid="uid://dufydpph45sn7" path="res://characters/input_controller/player_controller.gd" id="1_ixbpm"]
 [ext_resource type="Script" uid="uid://cs6pm4nixudgl" path="res://characters/ground_mover.gd" id="2_c6leb"]
 [ext_resource type="Script" uid="uid://b0fbpt3lbgtje" path="res://characters/gravity.gd" id="3_dirf7"]
 [ext_resource type="Script" uid="uid://df83tgk3w70up" path="res://characters/jumper.gd" id="4_idpv6"]
 [ext_resource type="Script" uid="uid://boc4vsfmxlpca" path="res://characters/health.gd" id="5_rpf03"]
+[ext_resource type="Script" uid="uid://cwhfw1xg2bjat" path="res://characters/dropper.gd" id="6_c6leb"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y36n6"]
 
@@ -45,7 +46,7 @@ body = NodePath("..")
 [node name="Jumper" type="Node" parent="." node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
 script = ExtResource("4_idpv6")
-jump_velocity = -200.0
+jump_velocity = -135.0
 body = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
@@ -61,3 +62,8 @@ position_smoothing_speed = 15.0
 position = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_c6leb")
 texture_scale = 2.0
+
+[node name="Dropper" type="Node" parent="." node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+script = ExtResource("6_c6leb")
+body = NodePath("..")

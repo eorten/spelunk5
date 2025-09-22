@@ -10,6 +10,7 @@ var _energy_drain_rate:float
 var _energy:float
 var _max_hp:int
 var _hp:int
+var _selected_placeable:PlaceableTypes.Type
 
 func _init(energy_drain_rate:float, max_hp:int) -> void:
 	_energy = 100
@@ -17,6 +18,13 @@ func _init(energy_drain_rate:float, max_hp:int) -> void:
 	_max_hp = max_hp
 	_hp = _max_hp
 	_inventory = Inventory.new()
+	_selected_placeable = PlaceableTypes.Type.EMPTY
+
+func select_placeable(placeable:PlaceableTypes.Type):
+	_selected_placeable = placeable
+
+func get_selected_placeable() -> PlaceableTypes.Type:
+	return _selected_placeable
 
 func tick_energy(delta:float):
 	_energy -= delta * _energy_drain_rate

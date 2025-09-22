@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl75l4diawb3x"]
+
+[ext_resource type="Texture2D" uid="uid://b3vaog3xy7qpp" path="res://placeables/ladder_tex.tres" id="1_5bdl8"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5bdl8"]
+b = Vector2(8, 0)
+
+[node name="Ladder" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 4)
+texture = ExtResource("1_5bdl8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_5bdl8")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 8)
+shape = SubResource("SegmentShape2D_5bdl8")
+one_way_collision = true

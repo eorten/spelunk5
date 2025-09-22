@@ -13,3 +13,7 @@ signal on_button_pressed_open_move
 #buy item
 signal on_button_pressed_buy(placeable:PlaceableTypes.Type)
 #endregion
+
+#region HUD
+signal on_button_pressed_select_placeable(placeable:PlaceableTypes.Type)
+#endregion

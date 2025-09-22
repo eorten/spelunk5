@@ -18,6 +18,7 @@ var _player_data:PlayerData
 var _player:Player
 var _world:World
 var _mining_system:MiningSystem
+var _placement_system:PlacementSystem
 func _ready() -> void:
 	#Connect events
 	EventBus.on_button_pressed_start_game.connect(func():
@@ -49,6 +50,7 @@ func _ready() -> void:
 		)
 		_world = World.new(world_size, biomes_data_registry[biome], biomes_visual_registry[biome], base_boime_data, base_boime_visuals, biome)
 		_mining_system = MiningSystem.new(_world)
+		_placement_system = PlacementSystem.new(_world)
 		world_root.initialize(_world, placeable_registry)
 		world_root.create_world()
 		_current_round_data = RoundData.new(-1, 120)
@@ -96,6 +98,9 @@ func _ready() -> void:
 		else:
 			Viewmodel.terminal_vm.set_state(TerminalState.new("can not afford " + PlaceableTypes.Type.keys()[placeable] + " (" + str(price) + "$) with " + str(_player_data.get_currency()) + "$"))
 	)
+	EventBus.on_button_pressed_select_placeable.connect(func(placeable:PlaceableTypes.Type):
+		_player.select_placeable(placeable)
+	)
 	
 	GameEventBus.on_player_hatch_interacted.connect(func():
 		if _gamestate.state != GameState.States.PLAYING:return;
@@ -110,7 +115,10 @@ func _ready() -> void:
 	GameEventBus.on_player_try_mine.connect(func(pos:Vector2i):
 		_mining_system.try_mine_at(pos, _player.get_inventory())
 	)
-	
+	GameEventBus.on_player_try_place.connect(func(pos:Vector2i):
+		if _player.get_selected_placeable() == PlaceableTypes.Type.EMPTY:return;
+		var res:bool = _placement_system.try_place_at(pos, _player.get_selected_placeable())
+	)
 	#Start game
 	_gamestate = GameState.new(GameState.States.BETWEEN_ROUND, false)
 	_player_data = PlayerData.new()
@@ -157,8 +165,11 @@ func update_hud(player:Player):
 		HUDState.new(player.get_energy(), player.get_hp(), player.get_playtime(), player.get_inventory().get_inventory(), _player_data.get_placeable_inventory().get_inventory())
 	)
 
+var _timer = 0.0
 func _process(delta: float) -> void:
-	if _gamestate.state == GameState.States.PLAYING:
-		_player.tick_playtime(delta)
-		_player.tick_energy(delta)
+	_timer += delta
+	if _timer >= 1.0 and _gamestate.state == GameState.States.PLAYING:
+		_player.tick_playtime(_timer)
+		_player.tick_energy(_timer)
 		update_hud(_player)
+		_timer = 0
