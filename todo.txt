@@ -1,1 +1,9 @@
-abstract away base biome, add it to world, have dict in game
+add targeting system + targeted tile highlight
+add mining-time
+add occluder to unexplored tiles
+add gameplay shaders
+add quota
+
+add more bimoes
+add more placeables
+add loadouts/X different robots

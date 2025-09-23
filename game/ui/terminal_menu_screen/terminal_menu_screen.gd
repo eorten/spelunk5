@@ -27,14 +27,14 @@ class_name TerminalMenuScreen extends Node
 
 var state:TerminalMenuState
 func _ready() -> void:
-	shop_button.pressed.connect(EventBus.on_button_pressed_open_shop.emit)
-	move_button.pressed.connect(EventBus.on_button_pressed_open_move.emit)
-	cave_button.pressed.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.CAVE))
-	fungal_cave_button.pressed.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.FUNGAL))
-	fiery_cave_button.pressed.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.LAVA))
-	ice_cave_button.pressed.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.ICE))
-	crystal_cave_button.pressed.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.CRYSTAL))
-	deploy_button.pressed.connect(EventBus.on_button_pressed_deploy.emit)
+	shop_button.button_up.connect(EventBus.on_button_pressed_open_shop.emit)
+	move_button.button_up.connect(EventBus.on_button_pressed_open_move.emit)
+	cave_button.button_up.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.CAVE))
+	fungal_cave_button.button_up.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.FUNGAL))
+	fiery_cave_button.button_up.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.LAVA))
+	ice_cave_button.button_up.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.ICE))
+	crystal_cave_button.button_up.connect(func():EventBus.on_button_pressed_move_location.emit(BiomeTypes.Type.CRYSTAL))
+	deploy_button.button_up.connect(EventBus.on_button_pressed_deploy.emit)
 	
 	Viewmodel.terminal_menu_screen_vm.state_changed.connect(func(new_state:TerminalMenuState):
 		state = new_state
@@ -63,7 +63,7 @@ func _ready() -> void:
 			new_item.text = str(PlaceableTypes.Type.keys()[placeable]) + " - " + str(dict[placeable]) + "$ (has " +str(player_has_dict.get(placeable, 0)) +")"
 			new_item.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			shop_item_container.add_child(new_item)
-			new_item.pressed.connect(func():
+			new_item.button_up.connect(func():
 				EventBus.on_button_pressed_buy.emit(placeable)
 			)
 	)

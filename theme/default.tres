@@ -34,3 +34,5 @@ MarginContainer/constants/margin_right = 12
 MarginContainer/constants/margin_top = 12
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_y77lc")
 RichTextLabel/colors/default_color = Color(1, 0.5686275, 0, 1)
+SelectedButton/base_type = &"Button"
+SelectedButton/colors/font_color = Color(1, 1, 1, 1)

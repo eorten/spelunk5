@@ -3,6 +3,7 @@ extends Node
 @onready var ui: CanvasLayer = %UI
 @onready var world_root: WorldRoot = %WorldRoot
 
+@export_flags_2d_physics var raycast_collision_mask
 @export var world_size:int #can move to a config later
 @export var placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene] #Move to worldroot?
 @export var shop:Dictionary[PlaceableTypes.Type, int] #placeable - price
@@ -19,6 +20,7 @@ var _player:Player
 var _world:World
 var _mining_system:MiningSystem
 var _placement_system:PlacementSystem
+var _targeting_system:TargetingSystem
 func _ready() -> void:
 	#Connect events
 	EventBus.on_button_pressed_start_game.connect(func():
@@ -51,6 +53,7 @@ func _ready() -> void:
 		_world = World.new(world_size, biomes_data_registry[biome], biomes_visual_registry[biome], base_boime_data, base_boime_visuals, biome)
 		_mining_system = MiningSystem.new(_world)
 		_placement_system = PlacementSystem.new(_world)
+		_targeting_system = TargetingSystem.new(world_root, _world, raycast_collision_mask)
 		world_root.initialize(_world, placeable_registry)
 		world_root.create_world()
 		_current_round_data = RoundData.new(-1, 120)
@@ -100,6 +103,7 @@ func _ready() -> void:
 	)
 	EventBus.on_button_pressed_select_placeable.connect(func(placeable:PlaceableTypes.Type):
 		_player.select_placeable(placeable)
+		update_hud(_player)
 	)
 	
 	GameEventBus.on_player_hatch_interacted.connect(func():
@@ -116,8 +120,12 @@ func _ready() -> void:
 		_mining_system.try_mine_at(pos, _player.get_inventory())
 	)
 	GameEventBus.on_player_try_place.connect(func(pos:Vector2i):
-		if _player.get_selected_placeable() == PlaceableTypes.Type.EMPTY:return;
-		var res:bool = _placement_system.try_place_at(pos, _player.get_selected_placeable())
+		if _player.get_selected_placeable() == PlaceableTypes.Type.EMPTY:return; #No placeable selected - return
+		if !_player_data.get_placeable_inventory().get_item( _player.get_selected_placeable()):return; #Player inventory dont have item/has 0 of item - return
+		var placed:bool = _placement_system.try_place_at(pos, _player.get_selected_placeable())
+		if placed: #If placed, reduce from inventory
+			_player_data.get_placeable_inventory().reduce_item(_player.get_selected_placeable(), 1)
+		update_hud(_player)
 	)
 	#Start game
 	_gamestate = GameState.new(GameState.States.BETWEEN_ROUND, false)
@@ -162,9 +170,13 @@ func end_run():
 func update_hud(player:Player):
 	var old_state := Viewmodel.hud_vm.get_state() as HUDState
 	Viewmodel.hud_vm.set_state(
-		HUDState.new(player.get_energy(), player.get_hp(), player.get_playtime(), player.get_inventory().get_inventory(), _player_data.get_placeable_inventory().get_inventory())
+		HUDState.new(player.get_energy(), player.get_hp(), player.get_playtime(), player.get_inventory().get_inventory(), _player_data.get_placeable_inventory().get_inventory(), player.get_selected_placeable())
 	)
 
+func update_reticle(pos):
+	Viewmodel.hud_reticle_vm.set_state(
+		HUDReticleState.new(pos)
+	)
 var _timer = 0.0
 func _process(delta: float) -> void:
 	_timer += delta
@@ -173,3 +185,14 @@ func _process(delta: float) -> void:
 		_player.tick_energy(_timer)
 		update_hud(_player)
 		_timer = 0
+
+func _physics_process(delta: float) -> void:
+	if !_gamestate.state == GameState.States.PLAYING:return;
+	_targeting_system.tick(world_root.get_player_position(), world_root.get_player_mouse_pos())
+	var target_pos = World.cell_to_global(_targeting_system.get_targeted_pos()) as Vector2i
+	update_reticle(world_to_screen_pos(target_pos))
+	
+func world_to_screen_pos(world_pos: Vector2) -> Vector2:
+	# The canvas_transform already includes the active Camera2D transform
+	var canvas_transform: Transform2D = get_viewport().get_canvas_transform()
+	return canvas_transform * world_pos

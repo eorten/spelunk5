@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b8hbjfvxnb4wq"]
+[gd_scene load_steps=31 format=3 uid="uid://b8hbjfvxnb4wq"]
 
 [ext_resource type="Script" uid="uid://dpeiskorxqkak" path="res://game/game.gd" id="1_hb504"]
 [ext_resource type="LabelSettings" uid="uid://c0vd5bbx35cax" path="res://theme/labels/body.tres" id="1_vasa2"]
@@ -16,12 +16,18 @@
 [ext_resource type="Script" uid="uid://fakratwk737w" path="res://game/world/world_root.gd" id="6_ln7ps"]
 [ext_resource type="Texture2D" uid="uid://bdgxhhec4ydqt" path="res://textures/terrain/biome_sheet.png" id="7_vsp63"]
 [ext_resource type="PackedScene" uid="uid://c34ikudpsdehf" path="res://game/ui/terminal_menu_screen/terminal_menu_screen.tscn" id="8_mhvfb"]
+[ext_resource type="Theme" uid="uid://qbakscdd8o1p" path="res://theme/default.tres" id="12_u8s88"]
+[ext_resource type="Texture2D" uid="uid://mrtivuyhsqlt" path="res://textures/Corners.png" id="13_dxwpq"]
+[ext_resource type="Script" uid="uid://cnk08vde7jw8i" path="res://game/ui/hud_screen/hud_screen.gd" id="13_mhvfb"]
 [ext_resource type="PackedScene" uid="uid://dh1otrxy31gke" path="res://characters/player/player.tscn" id="15_4cobl"]
-[ext_resource type="PackedScene" uid="uid://ceeakj307x55t" path="res://game/ui/hud_screen/hud_screen.tscn" id="16_mhvfb"]
 [ext_resource type="Resource" uid="uid://64qb0lbringj" path="res://biomes/base_biome/base_data.tres" id="16_q52ks"]
 [ext_resource type="Resource" uid="uid://clt2nb4md6hjw" path="res://biomes/base_biome/base_visuals.tres" id="17_jucfl"]
 [ext_resource type="Shader" uid="uid://bj20fdbqsa2qh" path="res://theme/post_process/bloom.gdshader" id="18_pxxsx"]
 [ext_resource type="Shader" uid="uid://dqlays4pv4t8g" path="res://theme/post_process/crt.gdshader" id="19_u8s88"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mhvfb"]
+texture = ExtResource("13_dxwpq")
+modulate_color = Color(1, 0.5686275, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxwpq"]
 shader = ExtResource("18_pxxsx")
@@ -101,7 +107,6 @@ glow_bloom = 0.41
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hb504")
-raycast_collision_mask = 1
 world_size = 128
 placeable_registry = Dictionary[int, PackedScene]({
 1: ExtResource("2_4cobl"),
@@ -206,8 +211,102 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 visible = false
 
-[node name="HUDScreen" parent="UI" instance=ExtResource("16_mhvfb")]
+[node name="HUDScreen" type="Control" parent="UI"]
 unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("12_u8s88")
+script = ExtResource("13_mhvfb")
+
+[node name="bg" type="Control" parent="UI/HUDScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUDScreen/bg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/HUDScreen/bg/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mhvfb")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUDScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUDScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="VBoxContainer" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/Label"]
+layout_mode = 2
+text = "rec"
+
+[node name="TimerLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/Label"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "00:00:00"
+
+[node name="Label3" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Cam 01"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="BatteryLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Battery: 100%"
+
+[node name="HPLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Integrity: 100%"
+
+[node name="InventoryLabel" type="Label" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="PlaceableBox" type="VBoxContainer" parent="UI/HUDScreen/MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+alignment = 1
 
 [node name="PostProcess" type="Control" parent="UI"]
 layout_mode = 3

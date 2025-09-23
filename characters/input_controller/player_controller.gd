@@ -7,12 +7,18 @@ extends CharacterBody2D
 func initialize():
 	pass
 
+var _mouse_pos:Vector2i
+func get_player_mouse_pos() -> Vector2i:
+	return _mouse_pos
+	
 func _process(delta: float) -> void:
+	_mouse_pos = get_global_mouse_position()
+
 	if Input.is_action_just_pressed("action_place"):
-		GameEventBus.on_player_try_place.emit(get_global_mouse_position())
+		GameEventBus.on_player_try_place.emit(_mouse_pos)
 		
 	if Input.is_action_just_pressed("action_mine"):
-		GameEventBus.on_player_try_mine.emit(get_global_mouse_position())
+		GameEventBus.on_player_try_mine.emit(_mouse_pos)
 	
 	if Input.is_action_just_pressed("move_jump"):
 		jumper.jump()
