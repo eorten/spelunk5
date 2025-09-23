@@ -38,7 +38,7 @@ func re_render_cell(pos:Vector2i, world_dict:Dictionary, world_placeable_dict:Di
 			var new_placeable := placeable_prefab.instantiate() as Node2D
 			placeable_dict[pos] = new_placeable
 			placeable_layer.add_child(new_placeable)
-			new_placeable.position = World.cell_to_global(pos)
+			new_placeable.global_position = World.cell_to_global(pos) #Wrong? 
 			
 		TileType.Type.DIRT:
 			_place_dirt(pos,biome_visuals)

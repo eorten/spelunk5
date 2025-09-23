@@ -74,6 +74,7 @@ action_place={
 
 2d_physics/layer_1="terrain"
 2d_physics/layer_2="player"
+2d_physics/layer_3="ladder"
 
 [rendering]
 

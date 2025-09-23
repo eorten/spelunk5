@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://b8hbjfvxnb4wq"]
+[gd_scene load_steps=29 format=3 uid="uid://b8hbjfvxnb4wq"]
 
 [ext_resource type="Script" uid="uid://dpeiskorxqkak" path="res://game/game.gd" id="1_hb504"]
 [ext_resource type="LabelSettings" uid="uid://c0vd5bbx35cax" path="res://theme/labels/body.tres" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://qhxwxybgxfc4" path="res://game/world/character_spawnpoint/spawnpoint.tscn" id="2_4cobl"]
+[ext_resource type="PackedScene" uid="uid://ba31rjmwxhymo" path="res://game/systems/mining_system/mining_anim_prefab.tscn" id="2_5e03w"]
 [ext_resource type="Script" uid="uid://dnc4bag1jtemq" path="res://game/world/world_generator/biome_data.gd" id="2_8bboj"]
 [ext_resource type="Script" uid="uid://c2futd6erilxg" path="res://game/ui/ui.gd" id="2_ee6o4"]
 [ext_resource type="LabelSettings" uid="uid://cbiksthdgq5sp" path="res://theme/labels/h1.tres" id="2_h7iqs"]
@@ -102,6 +103,7 @@ glow_bloom = 0.41
 [node name="Game" type="Node"]
 script = ExtResource("1_hb504")
 raycast_collision_mask = 1
+mine_anim_prefab = ExtResource("2_5e03w")
 world_size = 128
 placeable_registry = Dictionary[int, PackedScene]({
 1: ExtResource("2_4cobl"),

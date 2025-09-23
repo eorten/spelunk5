@@ -10,26 +10,3 @@ func try_place_at(global_pos:Vector2i , placeable:PlaceableTypes.Type) -> bool:
 		_world.set_world_placeable(placeable, local_pos)
 		return true
 	return false
-
-#class_name MiningSystem extends RefCounted
-### Mediator
-#var _world:World
-#func _init(world:World) -> void:
-	#_world = world
-#
-#func try_mine_at(global_pos:Vector2i , inventory:Inventory):
-	#var local_pos = World.global_to_cell(global_pos)
-	#
-	#if _world.cell_exists(local_pos):
-		#var tile_type:TileType.Type = _world._world_cells[local_pos]
-		#var ore = null
-		#if _world.get_biome_data().biome_dict.has(tile_type):
-			#ore = _world.get_biome_data().get_entry(tile_type) as BiomeDataEntry
-			#
-		#if ore:
-			#if tile_type == TileType.Type.ORE_BIOME:
-				#inventory.add_item(str(TileType.Type.keys()[tile_type]))
-			#else:
-				#inventory.add_items("CURRENCY", ore.currency_value)
-				#
-		#_world.remove_cell(local_pos)

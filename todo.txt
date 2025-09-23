@@ -1,4 +1,4 @@
-add targeting system + targeted tile highlight
+add targeting system + targeted tile highlight ✓
 add mining-time
 add occluder to unexplored tiles
 add gameplay shaders

@@ -35,6 +35,7 @@ func set_world_cells(world_cells:Dictionary[Vector2i, TileType.Type]):
 	_world_cells = world_cells
 
 func remove_cell(pos:Vector2i):
+	
 	_world_cells.set(pos, TileType.Type.AIR)
 	if _world_placeables.has(pos):
 		_world_placeables.set(pos, PlaceableTypes.Type.EMPTY)
@@ -66,14 +67,17 @@ func get_world_cells() -> Dictionary[Vector2i, TileType.Type]:
 func get_spawnpoint() -> Vector2i:
 	return _spawnpoint
 func get_biome_data() -> BiomeData:
-	return _biome_data	
+	return _biome_data
 func get_biome_visuals() -> BiomeVisuals:
 	return _biome_visuals
 func get_size() -> int:
 	return _world_size
 func get_world_placeables() -> Dictionary[Vector2i, PlaceableTypes.Type]:
 	return _world_placeables
-	
+
+static func snap_pos_to_grid(pos:Vector2i) -> Vector2i:
+	pos -= Vector2i(TILE_SIZE, TILE_SIZE)/2
+	return pos.snapped(Vector2i(TILE_SIZE, TILE_SIZE)) 
 static func cell_to_global(pos:Vector2i) -> Vector2i:
 	return pos*TILE_SIZE
 static func global_to_cell(pos:Vector2i) -> Vector2i:
