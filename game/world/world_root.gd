@@ -38,7 +38,7 @@ func spawn_player():
 	_player.initialize()
 
 func get_player_position() -> Vector2:
-	return _player.position as Vector2 if _player else Vector2.ZERO
+	return _player.global_position + Vector2.ONE * World.TILE_SIZE/2 as Vector2 if _player else Vector2.ZERO
 
 func get_player_mouse_pos() -> Vector2:
 	return _player.get_player_mouse_pos() if _player else Vector2.ZERO

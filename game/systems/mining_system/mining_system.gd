@@ -1,5 +1,6 @@
 class_name MiningSystem extends RefCounted
 ## Mediator
+
 var _world:World
 var _world_root:Node2D
 var _mine_animation_prefab:PackedScene
@@ -40,6 +41,7 @@ var current_mine_anim:Node2D
 var mining_pos:Vector2i
 var current_mine_timer:float
 func start_mine(global_pos:Vector2i, mine_time:float, inventory:Inventory):
+	if(mining):return;
 	mining = true
 	current_mine_timer = mine_time
 	current_inv = inventory
@@ -62,5 +64,5 @@ func tick(delta:float):
 	current_mine_timer -= delta
 	if current_mine_timer <= 0:
 		_mine_at(mining_pos, current_inv)
+		interrupt_mine()
 		mining = false
-		

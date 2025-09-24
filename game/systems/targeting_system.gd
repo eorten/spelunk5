@@ -32,6 +32,7 @@ func tick(origin_world_pos:Vector2, target_world_pos:Vector2, targeting_range:in
 	
 	#target_world_pos = (Vector2(target_world_pos) - Vector2(origin_world_pos)).normalized() * targeting_range #ADD RANGE
 	var cast_res = _cast_result(origin_world_pos, target_world_pos)
+
 	if cast_res.get("collider"): #If ray hit
 		var hit_tile_pos = cast_res.get("position") - cast_res.get("normal")
 		_tile_empty = false

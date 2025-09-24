@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("action_place"):
 		GameEventBus.on_player_try_place.emit(_mouse_pos)
 		
-	if Input.is_action_just_pressed("action_mine"):
+	if Input.is_action_pressed("action_mine"):
 		GameEventBus.on_player_try_mine.emit(_mouse_pos)
 	elif Input.is_action_just_released("action_mine"):
 		GameEventBus.on_player_stop_try_mine.emit()

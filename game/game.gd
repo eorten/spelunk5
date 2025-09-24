@@ -74,7 +74,7 @@ func _ready() -> void:
 
 		world_root.render_world()
 		world_root.spawn_player()
-		_player = Player.new(.5 ,1, 100)
+		_player = Player.new(.5 ,1, 32)
 		_player.on_out_of_hp.connect(func():
 			end_run()
 			update_resource_ui()
@@ -118,8 +118,13 @@ func _ready() -> void:
 	)
 	
 	GameEventBus.on_player_try_mine.connect(func(_o:Vector2i):
-		if !_targeting_system.can_destroy_targeted():return;
-		if !_mining_system.can_mine_at(_targeting_system.get_targeted_pos()) :return;
+		if !_targeting_system.can_destroy_targeted():
+			return;
+		if !_mining_system.can_mine_at(_targeting_system.get_targeted_pos()) :
+			return;
+		if _world.tile_is_air(World.global_to_cell(_targeting_system.get_targeted_pos())): 
+			return;
+		
 		#_mining_system.start_mine(World.snap_pos_to_grid(_targeting_system.get_targeted_pos()), 0.3, _player.get_inventory())
 		_mining_system.start_mine(_targeting_system.get_targeted_pos(), 0.3, _player.get_inventory())
 	)
@@ -196,7 +201,7 @@ func update_reticle(pos):
 var _timer = 0.0
 func _process(delta: float) -> void:
 	if !_gamestate.state == GameState.States.PLAYING:return;
-	_mining_system.tick(delta)
+	
 	_timer += delta
 	if _timer >= 1.0:
 		_player.tick_playtime(_timer)
@@ -204,9 +209,11 @@ func _process(delta: float) -> void:
 		update_hud(_player)
 		_timer = 0
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !_gamestate.state == GameState.States.PLAYING:return;
+	_mining_system.tick(delta)
 	_targeting_system.tick(world_root.get_player_position(), world_root.get_player_mouse_pos(), _player.get_range())
+	
 	#var target_pos = World.snap_pos_to_grid(_targeting_system.get_targeted_pos()) as Vector2i
 	var target_pos = _targeting_system.get_targeted_pos() as Vector2i
 	update_reticle(world_to_screen_pos(target_pos))
