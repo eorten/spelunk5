@@ -29,6 +29,7 @@ func _mine_at(global_pos:Vector2i, inventory:Inventory):
 	#elif placeable_type:
 		
 	_world.remove_cell(local_pos)
+	_world.discover_tile(local_pos)
 
 func can_mine_at(global_pos:Vector2i) -> bool:
 	var local_pos = World.global_to_cell(global_pos)

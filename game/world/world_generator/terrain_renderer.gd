@@ -29,9 +29,6 @@ func re_render_cell(pos:Vector2i, world_dict:Dictionary, world_placeable_dict:Di
 				placeable_dict[pos].queue_free()
 		
 		TileType.Type.PLACEABLE:
-			#remove old
-			#if placeable_dict.get(pos, null):
-				#placeable_dict[pos].queue_free()
 				
 			var placeable_type := world_placeable_dict.get(pos) as PlaceableTypes.Type
 			var placeable_prefab := placeable_registry.get(placeable_type) as PackedScene

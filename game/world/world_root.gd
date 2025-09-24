@@ -2,12 +2,14 @@ class_name WorldRoot extends Node2D
 ## Visuals and interface for World 
 @export var player_prefab:PackedScene
 @onready var terrain_renderer: TerrainRenderer = %TerrainRenderer
+@onready var occluder_renderer: Node2D = %OccluderRenderer
 
 var _player:Node2D
 var _world:World
 var _placeable_registry:Dictionary[PlaceableTypes.Type, PackedScene]
 func initialize(world:World, placeable_registry:Dictionary) -> void:
 	_world = world
+	occluder_renderer.initialize(_world)
 	_world.on_cell_changed.connect(render_tile)
 	_placeable_registry = placeable_registry
 
@@ -24,6 +26,9 @@ func _create_spawnpoint():
 	_world.set_player_spawnpoint()
 	_world.set_world_placeable(PlaceableTypes.Type.SPAWN, _world.get_spawnpoint())
 
+func render_occluders():
+	occluder_renderer.set_occluders()
+
 func render_world():
 	terrain_renderer.render(_world.get_world_cells(), _world.get_world_placeables(), _placeable_registry, _world.get_biome_visuals())
 	_spawn_enemies()
@@ -36,6 +41,7 @@ func spawn_player():
 	add_child(_player)
 	_player.position = World.cell_to_global(_world.get_spawnpoint()) 
 	_player.initialize()
+	_world.discover_tile(_world.get_spawnpoint())
 
 func get_player_position() -> Vector2:
 	return _player.global_position + Vector2.ONE * World.TILE_SIZE/2 as Vector2 if _player else Vector2.ZERO
