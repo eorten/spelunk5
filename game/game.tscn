@@ -114,7 +114,7 @@ glow_bloom = 0.41
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hb504")
-raycast_collision_mask = 1
+raycast_collision_mask = 9
 mine_anim_prefab = ExtResource("2_5e03w")
 world_size = 128
 placeable_registry = Dictionary[int, PackedScene]({

@@ -121,11 +121,10 @@ func _ready() -> void:
 	GameEventBus.on_player_try_mine.connect(func(_o:Vector2i):
 		if _world.tile_is_air(World.global_to_cell(_targeting_system.get_targeted_pos())): 
 			return;
-		if !_targeting_system.can_destroy_targeted():
+		#if !_targeting_system.can_destroy_targeted():
+			#return;
+		if !_mining_system.can_mine_at(_targeting_system.get_targeted_pos()):
 			return;
-		if !_mining_system.can_mine_at(_targeting_system.get_targeted_pos()) :
-			return;
-
 		
 		#_mining_system.start_mine(World.snap_pos_to_grid(_targeting_system.get_targeted_pos()), 0.3, _player.get_inventory())
 		_mining_system.start_mine(_targeting_system.get_targeted_pos(), 0.3, _player.get_inventory())
