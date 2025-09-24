@@ -45,7 +45,8 @@ func start_mine(global_pos:Vector2i, mine_time:float, inventory:Inventory):
 	current_inv = inventory
 	mining_pos = global_pos
 	current_mine_anim = _mine_animation_prefab.instantiate()
-	current_mine_anim.global_position = World.snap_pos_to_grid(global_pos)
+	#current_mine_anim.global_position = World.snap_pos_to_grid(global_pos)
+	current_mine_anim.global_position = global_pos
 	_world_root.add_child(current_mine_anim)
 	current_mine_anim.play_anim(mine_time)
 

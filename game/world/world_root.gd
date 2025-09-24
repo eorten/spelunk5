@@ -37,11 +37,11 @@ func spawn_player():
 	_player.position = World.cell_to_global(_world.get_spawnpoint()) 
 	_player.initialize()
 
-func get_player_position() -> Vector2i:
-	return _player.position as Vector2i if _player else Vector2i.ZERO
+func get_player_position() -> Vector2:
+	return _player.position as Vector2 if _player else Vector2.ZERO
 
-func get_player_mouse_pos() -> Vector2i:
-	return _player.get_player_mouse_pos() as Vector2i if _player else Vector2i.ZERO
+func get_player_mouse_pos() -> Vector2:
+	return _player.get_player_mouse_pos() if _player else Vector2.ZERO
 
 func remove_cell(pos:Vector2i):
 	_world.remove_cell(pos)

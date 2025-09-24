@@ -74,7 +74,7 @@ func _ready() -> void:
 
 		world_root.render_world()
 		world_root.spawn_player()
-		_player = Player.new(.5 ,1)
+		_player = Player.new(.5 ,1, 100)
 		_player.on_out_of_hp.connect(func():
 			end_run()
 			update_resource_ui()
@@ -206,11 +206,12 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if !_gamestate.state == GameState.States.PLAYING:return;
-	_targeting_system.tick(world_root.get_player_position(), world_root.get_player_mouse_pos())
-	var target_pos = World.snap_pos_to_grid(_targeting_system.get_targeted_pos()) as Vector2i
+	_targeting_system.tick(world_root.get_player_position(), world_root.get_player_mouse_pos(), _player.get_range())
+	#var target_pos = World.snap_pos_to_grid(_targeting_system.get_targeted_pos()) as Vector2i
+	var target_pos = _targeting_system.get_targeted_pos() as Vector2i
 	update_reticle(world_to_screen_pos(target_pos))
+	$Sprite2D.global_position =  world_root.get_player_mouse_pos()
 	
 func world_to_screen_pos(world_pos: Vector2) -> Vector2:
-	# The canvas_transform already includes the active Camera2D transform
 	var canvas_transform: Transform2D = get_viewport().get_canvas_transform()
 	return canvas_transform * world_pos

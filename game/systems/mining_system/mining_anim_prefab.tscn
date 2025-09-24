@@ -8,7 +8,6 @@ script = ExtResource("2_4q343")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(4, 4)
 sprite_frames = ExtResource("1_6aloj")
 autoplay = "default"
 

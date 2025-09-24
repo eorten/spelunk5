@@ -10,15 +10,17 @@ var _energy_drain_rate:float
 var _energy:float
 var _max_hp:int
 var _hp:int
+var _range:int
 var _selected_placeable:PlaceableTypes.Type
 
-func _init(energy_drain_rate:float, max_hp:int) -> void:
+func _init(energy_drain_rate:float, max_hp:int, range:int) -> void:
 	_energy = 100
 	_energy_drain_rate = energy_drain_rate
 	_max_hp = max_hp
 	_hp = _max_hp
 	_inventory = Inventory.new()
 	_selected_placeable = PlaceableTypes.Type.EMPTY
+	_range = range
 
 func select_placeable(placeable:PlaceableTypes.Type):
 	_selected_placeable = placeable
@@ -46,5 +48,7 @@ func get_playtime() -> float:
 	return _playtime
 func get_hp() -> int:
 	return _hp
+func get_range() -> int:
+	return _range
 func get_inventory() -> Inventory:
 	return _inventory

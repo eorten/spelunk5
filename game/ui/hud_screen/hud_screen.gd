@@ -4,7 +4,7 @@ class_name HUDScreen extends Control
 @onready var timer_label: Label = %TimerLabel
 @onready var inventory_label: Label = %InventoryLabel
 @onready var placeable_box: VBoxContainer = %PlaceableBox
-@onready var reticle: TextureRect = %Reticle
+@onready var reticle: Control = %Reticle
 
 
 func _ready() -> void:

@@ -75,8 +75,10 @@ func get_size() -> int:
 func get_world_placeables() -> Dictionary[Vector2i, PlaceableTypes.Type]:
 	return _world_placeables
 
+static func snap_pos_to_grid_offset(pos:Vector2i) -> Vector2i:
+	return (pos - Vector2i(4, 4)).snapped(Vector2i(TILE_SIZE, TILE_SIZE)) + Vector2i(4, 4)
+
 static func snap_pos_to_grid(pos:Vector2i) -> Vector2i:
-	pos -= Vector2i(TILE_SIZE, TILE_SIZE)/2
 	return pos.snapped(Vector2i(TILE_SIZE, TILE_SIZE)) 
 static func cell_to_global(pos:Vector2i) -> Vector2i:
 	return pos*TILE_SIZE

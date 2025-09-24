@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b8hbjfvxnb4wq"]
+[gd_scene load_steps=30 format=3 uid="uid://b8hbjfvxnb4wq"]
 
 [ext_resource type="Script" uid="uid://dpeiskorxqkak" path="res://game/game.gd" id="1_hb504"]
 [ext_resource type="LabelSettings" uid="uid://c0vd5bbx35cax" path="res://theme/labels/body.tres" id="1_vasa2"]
@@ -99,6 +99,8 @@ sources/0 = SubResource("TileSetAtlasSource_b686c")
 background_mode = 3
 glow_enabled = true
 glow_bloom = 0.41
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5e03w"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hb504")
@@ -272,3 +274,8 @@ color = Color(0, 0, 0, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dxwpq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -1)
+scale = Vector2(2, 2)
+texture = SubResource("PlaceholderTexture2D_5e03w")
