@@ -4,6 +4,7 @@ class_name BiomeDataEntry extends Resource
 @export var currency_value:int = 0
 
 func get_grid(grid_size:int) -> BitMap:
+	map.seed = randf() * 9999
 	var res := BitMap.new()
 	res.create(Vector2i(grid_size,grid_size))
 	for x in grid_size:

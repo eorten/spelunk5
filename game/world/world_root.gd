@@ -38,7 +38,7 @@ func render_tile(pos:Vector2i):
 
 func spawn_player():
 	_player = player_prefab.instantiate()
-	add_child(_player)
+	$PlayerParent.add_child(_player)
 	_player.position = World.cell_to_global(_world.get_spawnpoint()) 
 	_player.initialize()
 	_world.discover_tile(_world.get_spawnpoint())

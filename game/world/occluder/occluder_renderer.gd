@@ -12,4 +12,4 @@ func set_occluders():
 			if visible_tiles.get_bit(x,y):
 				tile_map_layer.set_cell(Vector2i(x,y))
 				continue;
-			tile_map_layer.set_cell(Vector2i(x,y), 0, Vector2i.ZERO)
+			tile_map_layer.set_cell(Vector2i(x,y), 1, Vector2(0,1))

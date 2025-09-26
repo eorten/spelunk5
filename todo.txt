@@ -2,10 +2,10 @@ add targeting system + targeted tile highlight ✓
 add mining-time ✓
 add hold to mine ✓
 add occluder to unexplored tiles ✓
-mine placeables
-add gameplay shaders
+mine placeables ✓
+add gameplay shaders ✓
 add quota
 
 add more bimoes
 add more placeables
-add loadouts/X different robots
+add loadouts/crafting

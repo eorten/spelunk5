@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7sndo0x7efrv"
-path="res://.godot/imported/placeable_sheet.png-543eb7e6345408296fbab3d4b8ef7d25.ctex"
+uid="uid://dk5f27xux0m5l"
+path="res://.godot/imported/placeable_sheet_v2.png-54722e8808edfc9ae489f0bcc7500537.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://placeable_sheet.png"
-dest_files=["res://.godot/imported/placeable_sheet.png-543eb7e6345408296fbab3d4b8ef7d25.ctex"]
+source_file="res://textures/placeable_sheet_v2.png"
+dest_files=["res://.godot/imported/placeable_sheet_v2.png-54722e8808edfc9ae489f0bcc7500537.ctex"]
 
 [params]
 

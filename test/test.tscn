@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgqa4npht2cu"]
+
+[ext_resource type="Shader" uid="uid://b24s62xfar4p0" path="res://theme/post_process/palette_postprocess.gdshader" id="1_8a8pi"]
+[ext_resource type="Texture2D" uid="uid://cruhi523yndhj" path="res://textures/light_tex.tres" id="2_65205"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8a8pi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrq6i"]
+shader = ExtResource("1_8a8pi")
+shader_parameter/palette = PackedColorArray(0.050980393, 0.16862746, 0.27058825, 1, 0.1254902, 0.23529412, 0.3372549, 1, 0.32941177, 0.30588236, 0.40784314, 1, 0.5529412, 0.4117647, 0.47843137, 1, 0.8156863, 0.5058824, 0.34901962, 1, 1, 0.6666667, 0.36862746, 1, 1, 0.83137256, 0.6392157, 1, 1, 0.9254902, 0.8392157, 1)
+
+[node name="Test" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-118, -82)
+scale = Vector2(395, 345.00003)
+texture = SubResource("PlaceholderTexture2D_8a8pi")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(42, 49)
+range_layer_min = -1
+range_layer_max = 1
+texture = ExtResource("2_65205")
+texture_scale = 3.57
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hrq6i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

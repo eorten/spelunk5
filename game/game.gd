@@ -119,7 +119,7 @@ func _ready() -> void:
 	)
 	
 	GameEventBus.on_player_try_mine.connect(func(_o:Vector2i):
-		if _world.tile_is_air(World.global_to_cell(_targeting_system.get_targeted_pos())): 
+		if _world.tile_is_unmineable(World.global_to_cell(_targeting_system.get_targeted_pos())): 
 			return;
 		#if !_targeting_system.can_destroy_targeted():
 			#return;

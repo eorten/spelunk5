@@ -45,12 +45,13 @@ func set_world_placeable(type:PlaceableTypes.Type, pos:Vector2i):
 	_world_placeables[pos] = type
 	on_cell_changed.emit(pos)
 
-func tile_is_air(pos:Vector2i):
+func tile_is_unmineable(pos:Vector2i):
 	var placeable = _world_placeables.get(pos, PlaceableTypes.Type.EMPTY)
 	var terrain = _world_cells.get(pos)
 	#print( PlaceableTypes.Type.keys()[placeable])
 	#print( TileType.Type.keys()[terrain])
-	return (terrain == TileType.Type.AIR && placeable == PlaceableTypes.Type.EMPTY) or (terrain == TileType.Type.PLACEABLE && placeable == PlaceableTypes.Type.SPAWN)
+	#return (terrain == TileType.Type.AIR && placeable == PlaceableTypes.Type.EMPTY) or (terrain == TileType.Type.PLACEABLE && placeable == PlaceableTypes.Type.SPAWN)
+	return terrain == TileType.Type.AIR or terrain == TileType.Type.STONE or placeable == PlaceableTypes.Type.SPAWN
 	
 func terrain_at_pos_is(pos:Vector2i, type:TileType.Type):
 	var terrain = _world_cells.get(pos)

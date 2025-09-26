@@ -1,36 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c34ikudpsdehf"]
+[gd_scene load_steps=3 format=3 uid="uid://c34ikudpsdehf"]
 
 [ext_resource type="Theme" uid="uid://qbakscdd8o1p" path="res://theme/default.tres" id="1_e15kt"]
-[ext_resource type="Shader" uid="uid://dqlays4pv4t8g" path="res://theme/post_process/crt.gdshader" id="2_b68pv"]
-[ext_resource type="Shader" uid="uid://bj20fdbqsa2qh" path="res://theme/post_process/bloom.gdshader" id="2_ldof7"]
 [ext_resource type="Script" uid="uid://kksop1ypk1b0" path="res://game/ui/terminal_menu_screen/terminal_menu_screen.gd" id="2_yt5hn"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnlw7"]
-shader = ExtResource("2_ldof7")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyjrh"]
-shader = ExtResource("2_b68pv")
-shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.5850000277875
-shader_parameter/scanlines_width = 0.35600001691
-shader_parameter/grille_opacity = 0.3
-shader_parameter/resolution = Vector2(200, 200)
-shader_parameter/pixelate = false
-shader_parameter/roll = true
-shader_parameter/roll_speed = 1.745
-shader_parameter/roll_size = 6.87200032642
-shader_parameter/roll_variation = 4.64800021752012
-shader_parameter/distort_intensity = 0.0030000001425
-shader_parameter/noise_opacity = 0.110000005225
-shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.006000000285
-shader_parameter/aberration = 0.00500004773750006
-shader_parameter/brightness = 2.21
-shader_parameter/discolor = true
-shader_parameter/warp_amount = 0.730000034675
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.5
 
 [node name="TerminalMenuScreen" type="Control"]
 layout_mode = 3
@@ -294,36 +265,3 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "DEPLOY 
 [20 energy]"
-
-[node name="PostProcess" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Bloom" type="ColorRect" parent="PostProcess"]
-material = SubResource("ShaderMaterial_tnlw7")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="PostProcess"]
-copy_mode = 2
-
-[node name="PostProcess" type="ColorRect" parent="PostProcess"]
-material = SubResource("ShaderMaterial_gyjrh")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
