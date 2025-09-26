@@ -54,6 +54,10 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jucfl"]
+shader = ExtResource("20_q52ks")
+shader_parameter/levels = 24
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b686c"]
 texture = ExtResource("7_vsp63")
 texture_region_size = Vector2i(8, 8)
@@ -136,10 +140,6 @@ texture_region_size = Vector2i(8, 8)
 tile_size = Vector2i(8, 8)
 sources/0 = SubResource("TileSetAtlasSource_q52ks")
 sources/1 = SubResource("TileSetAtlasSource_jucfl")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jucfl"]
-shader = ExtResource("20_q52ks")
-shader_parameter/levels = 24
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hb504")
@@ -247,7 +247,6 @@ horizontal_alignment = 1
 
 [node name="TerminalMenuScreen" parent="UI" instance=ExtResource("8_mhvfb")]
 unique_name_in_owner = true
-visible = false
 
 [node name="HUDScreen" parent="UI" instance=ExtResource("16_mhvfb")]
 unique_name_in_owner = true
@@ -282,6 +281,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_jucfl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="WorldRoot" type="Node2D" parent="."]
@@ -320,16 +332,3 @@ script = ExtResource("22_leid8")
 [node name="TileMapLayer" type="TileMapLayer" parent="WorldRoot/OccluderRenderer"]
 unique_name_in_owner = true
 tile_set = SubResource("TileSet_jdpby")
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
-position = Vector2(365.5, 206)
-scale = Vector2(4.655, 3.06)
-copy_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_jucfl")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

@@ -14,3 +14,5 @@ func round_over() -> bool:
 	return _run_energy <= 0
 func get_current_energy() -> int:
 	return _run_energy
+func get_resource_quota() -> int:
+	return _resource_quota

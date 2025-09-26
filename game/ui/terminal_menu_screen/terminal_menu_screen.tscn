@@ -102,6 +102,12 @@ layout_mode = 2
 text = "Energy: 20%"
 vertical_alignment = 1
 
+[node name="QuotaLabel" type="Label" parent="ResourceSideBar/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quota: "
+vertical_alignment = 1
+
 [node name="Spacer" type="Control" parent="ResourceSideBar/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 19.56)
 layout_mode = 2

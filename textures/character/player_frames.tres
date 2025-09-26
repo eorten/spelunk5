@@ -1,0 +1,75 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://d3bgl45g053tu"]
+
+[ext_resource type="Texture2D" path="res://textures/character/fall.tres" id="1_gu7eo"]
+[ext_resource type="Texture2D" path="res://textures/character/idle_1.tres" id="2_w3ux6"]
+[ext_resource type="Texture2D" path="res://textures/character/idle_2.tres" id="3_6b8ua"]
+[ext_resource type="Texture2D" path="res://textures/character/jump.tres" id="4_ydutl"]
+[ext_resource type="Texture2D" path="res://textures/character/land_1.tres" id="5_2vghv"]
+[ext_resource type="Texture2D" path="res://textures/character/land_2.tres" id="6_jeoek"]
+[ext_resource type="Texture2D" path="res://textures/character/walk_1.tres" id="7_um5ae"]
+[ext_resource type="Texture2D" path="res://textures/character/walk_2.tres" id="8_qb65v"]
+[ext_resource type="Texture2D" path="res://textures/character/walk_start_1.tres" id="9_1qr6e"]
+[ext_resource type="Texture2D" path="res://textures/character/walk_start_2.tres" id="10_md23t"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gu7eo")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w3ux6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6b8ua")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ydutl")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2vghv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jeoek")
+}],
+"loop": false,
+"name": &"land",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_um5ae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qb65v")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_1qr6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_md23t")
+}],
+"loop": false,
+"name": &"walk_start",
+"speed": 5.0
+}]

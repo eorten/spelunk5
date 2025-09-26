@@ -1,4 +1,5 @@
 class_name GroundMover extends Node
+
 @export var speed:float
 @export var body:CharacterBody2D
 

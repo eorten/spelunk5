@@ -52,7 +52,11 @@ func tile_is_unmineable(pos:Vector2i):
 	#print( TileType.Type.keys()[terrain])
 	#return (terrain == TileType.Type.AIR && placeable == PlaceableTypes.Type.EMPTY) or (terrain == TileType.Type.PLACEABLE && placeable == PlaceableTypes.Type.SPAWN)
 	return terrain == TileType.Type.AIR or terrain == TileType.Type.STONE or placeable == PlaceableTypes.Type.SPAWN
-	
+func tile_is_air(pos:Vector2i):
+	var placeable = _world_placeables.get(pos, PlaceableTypes.Type.EMPTY)
+	var terrain = _world_cells.get(pos)
+	return (terrain == TileType.Type.AIR && placeable == PlaceableTypes.Type.EMPTY) or (terrain == TileType.Type.PLACEABLE && placeable == PlaceableTypes.Type.SPAWN)
+	#return terrain == TileType.Type.AIR or terrain == TileType.Type.STONE or placeable == PlaceableTypes.Type.SPAWN
 func terrain_at_pos_is(pos:Vector2i, type:TileType.Type):
 	var terrain = _world_cells.get(pos)
 	return terrain == type

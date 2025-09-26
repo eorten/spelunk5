@@ -47,6 +47,9 @@ func _ready() -> void:
 		)
 	)
 	EventBus.on_button_pressed_move_location.connect(func(biome:BiomeTypes.Type):
+		if !biomes_data_registry.has(biome):
+			Viewmodel.terminal_vm.set_state(TerminalState.new("Biome not implemented yet"))
+			return
 		_gamestate.biome_selected = true
 		Viewmodel.terminal_menu_screen_vm.set_state(
 			TerminalMenuState.new(TerminalMenuState.CenterPanelState.DESTINATION_SELECTED, biome)
@@ -58,14 +61,14 @@ func _ready() -> void:
 		_targeting_system = TargetingSystem.new(world_root, _world, raycast_collision_mask)
 		world_root.initialize(_world, placeable_registry)
 		world_root.create_world()
-		_current_round_data = RoundData.new(-1, 120)
+		_current_round_data = RoundData.new(200, 120)
 		Viewmodel.terminal_vm.set_state(TerminalState.new("location changed to " + BiomeTypes.Type.keys()[biome]))
 		update_resource_ui()
 	)
 	
 	EventBus.on_button_pressed_deploy.connect(func():
 		if !_gamestate.biome_selected:
-			Viewmodel.terminal_vm.set_state(TerminalState.new("select destination before deploying"))
+			Viewmodel.terminal_vm.set_state(TerminalState.new("select destination before deploying (menu -> move)"))
 			return;
 		_gamestate.state = GameState.States.PLAYING
 		
@@ -110,11 +113,11 @@ func _ready() -> void:
 	
 	GameEventBus.on_player_hatch_interacted.connect(func():
 		if _gamestate.state != GameState.States.PLAYING:return;
+		Viewmodel.terminal_vm.set_state(TerminalState.new("extracted successfully"))
 		end_run()
 		_player_data.get_inventory().add_inventory(
 			_player.get_inventory()
 		)
-		Viewmodel.terminal_vm.set_state(TerminalState.new("extracted successfully"))
 		update_resource_ui()
 	)
 	
@@ -151,11 +154,11 @@ func _ready() -> void:
 	#Start game
 	_gamestate = GameState.new(GameState.States.BETWEEN_ROUND, false)
 	_player_data = PlayerData.new()
-	_player_data.get_inventory().get_inventory()["CURRENCY"] = 1000
+	_player_data.get_inventory().get_inventory()["CURRENCY"] = 150
 	Viewmodel.ui_vm.set_state(
 		UIState.new(UIState.Screen.MAIN_MENU)
 	)
-	Viewmodel.terminal_vm.set_state(TerminalState.new("welcome"))
+	Viewmodel.terminal_vm.set_state(TerminalState.new("welcome - visit the shop"))
 	update_resource_ui()
 
 func update_resource_ui():
@@ -163,7 +166,8 @@ func update_resource_ui():
 		TerminalMenuRightState.new(
 			_player_data.get_inventory().get_item("currency"),
 			_current_round_data.get_current_energy() if _current_round_data else 0, 
-			_player_data.get_inventory().get_inventory()
+			_player_data.get_inventory().get_inventory(),
+			_current_round_data.get_resource_quota() if _current_round_data else "NOT SET"
 		)
 	)
 func update_shop_ui():
@@ -182,12 +186,16 @@ func end_run():
 		Viewmodel.terminal_menu_screen_vm.set_state(
 			TerminalMenuState.new(TerminalMenuState.CenterPanelState.SELECT_DESTINATION)
 		)
+		if _current_round_data.get_resource_quota() > _player_data.get_currency():
+			Viewmodel.terminal_vm.set_state(TerminalState.new("quota not filled - lost round"))
 	else:
 		_gamestate = GameState.new(GameState.States.BETWEEN_RUN, true)
 		var old_state = Viewmodel.terminal_menu_screen_vm.get_state()
 		Viewmodel.terminal_menu_screen_vm.set_state(
 			TerminalMenuState.new(TerminalMenuState.CenterPanelState.DESTINATION_SELECTED, old_state.selected_destination)
 		)
+
+			
 
 func update_hud(player:Player):
 	#var old_state := Viewmodel.hud_vm.get_state() as HUDState

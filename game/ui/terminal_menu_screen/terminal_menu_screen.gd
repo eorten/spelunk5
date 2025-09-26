@@ -5,6 +5,7 @@ class_name TerminalMenuScreen extends Node
 @onready var ice_cave_button: Button = %IceCaveButton
 @onready var crystal_cave_button: Button = %CrystalCaveButton
 @onready var deploy_button: Button = %DeployButton
+@onready var quota_label: Label = %QuotaLabel
 
 @onready var select_destination_panel: PanelContainer = %SelectDestinationPanel
 @onready var destination_selected_panel: PanelContainer = %DestinationSelectedPanel
@@ -47,6 +48,7 @@ func _ready() -> void:
 		terminal_text.text = new_state.text
 	)
 	Viewmodel.terminal_menu_right_vm.state_changed.connect(func(new_state:TerminalMenuRightState):
+		quota_label.text = "Quota: " + str(new_state.quota)
 		energy_label.text = "Energy: " + str(new_state.energy)
 		ore_label.text = ""
 		for k in new_state.ores:
